@@ -1,4 +1,4 @@
-"""ID посылки: 87588309."""
+"""ID посылки: 87592136."""
 
 from collections import Counter
 from itertools import chain
@@ -12,6 +12,9 @@ def max_score(field: List[str], k: int) -> int:
 
 
 if __name__ == '__main__':
-    k = int(input())
+    try:
+        k = int(input())
+    except ValueError:
+        raise ValueError('Необходимо ввести целочисленное значение')
     field = [input() for _ in range(4)]
     print(max_score(field, k))

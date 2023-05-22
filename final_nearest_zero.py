@@ -1,15 +1,7 @@
-"""ID посылки: 87586734."""
+"""ID посылки: 87592079."""
 
 from math import inf
 from typing import List
-
-
-def parse_list(s: str) -> List[int]:
-    return [int(x) for x in s.split()]
-
-
-def list_to_str(a: List[int]) -> str:
-    return ' '.join(map(str, a))
 
 
 def nearest_zeroes(numbers: List[int]) -> List[int]:
@@ -27,6 +19,10 @@ def nearest_zeroes(numbers: List[int]) -> List[int]:
 
 
 if __name__ == '__main__':
-    n = int(input())
-    houses = parse_list(input())
-    print(list_to_str(nearest_zeroes(houses)))
+    try:
+        n = int(input())
+        houses = [int(x) for x in input().split()]
+    except ValueError:
+        raise ValueError('Необходимо ввести только целочисленные значения')
+    distances = nearest_zeroes(houses)
+    print(' '.join(map(str, distances)))
