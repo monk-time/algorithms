@@ -1,10 +1,13 @@
+"""ID посылки: 87588309."""
+
 from collections import Counter
 from itertools import chain
+from typing import List
 
 
-def max_score(field: list[str], k: int) -> int:
+def max_score(field: List[str], k: int) -> int:
     counter = Counter(chain(*field))
-    counter.pop('.')
+    counter.pop('.', None)
     return sum(k * 2 >= value for value in counter.values())
 
 

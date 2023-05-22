@@ -92,8 +92,13 @@ def test_l():
 
 def test_nearest_zeroes():
     assert nearest_zeroes([0, 1, 4, 9, 0]) == [0, 1, 2, 1, 0]
+    assert nearest_zeroes([0, 1, 2, 3, 4, 0]) == [0, 1, 2, 2, 1, 0]
     assert nearest_zeroes([1, 2, 3, 0, 4, 5, 0, 6]) == [3, 2, 1, 0, 1, 1, 0, 1]
+    assert nearest_zeroes([1, 0, 0, 2]) == [1, 0, 0, 1]
+    assert nearest_zeroes([1, 0, 0, 2, 3]) == [1, 0, 0, 1, 2]
 
 
 def test_max_score():
     assert max_score(['1231', '2..2', '2..2', '2..2'], 2) == 2
+    assert max_score(['1111', '9999', '1111', '9911'], 4) == 1
+    assert max_score(['1111', '1111', '1111', '1111'], 4) == 0
