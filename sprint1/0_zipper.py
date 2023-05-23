@@ -14,4 +14,4 @@ def read_input() -> tuple[list[int], list[int]]:
 
 if __name__ == '__main__':
     a, b = read_input()
-    print(" ".join(map(str, zipper(a, b))))
+    print(' '.join(map(str, zipper(a, b))))
