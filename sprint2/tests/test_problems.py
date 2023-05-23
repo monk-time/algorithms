@@ -2,6 +2,7 @@ import pytest
 
 from sprint2 import b_todo, c_tedious_work, d_caring_mother, e_reversed
 from sprint2.a_monitoring import transpose
+from sprint2.f_stack_max import StackMax, execute
 
 
 def test_a():
@@ -82,3 +83,74 @@ def test_e():
     assert node1.next is node0
     assert node1.prev is node2
     assert node0.prev is node1
+
+
+@pytest.mark.parametrize(
+    'commands, expected',
+    (
+        (
+            (
+                'get_max',
+                'push 7',
+                'pop',
+                'push -2',
+                'push -1',
+                'pop',
+                'get_max',
+                'get_max',
+            ),
+            'None\n-2\n-2\n',
+        ),
+        (
+            (
+                'pop',
+                'push 1',
+                'push 1',
+                'push 1',
+                'get_max',
+                'pop',
+                'get_max',
+                'get_max',
+                'pop',
+                'pop',
+                'get_max',
+                'pop',
+            ),
+            'error\n1\n1\n1\nNone\nerror\n',
+        ),
+        (
+            (
+                'pop',
+                'pop',
+                'push 4',
+                'push -5',
+                'push 7',
+                'pop',
+                'pop',
+                'get_max',
+            ),
+            'error\nerror\n4\n',
+        ),
+        (
+            (
+                'get_max',
+                'push -6',
+                'pop',
+                'pop',
+                'get_max',
+                'push 2',
+                'get_max',
+                'pop',
+                'push -2',
+            ),
+            'None\nerror\nNone\n2\n',
+        ),
+    ),
+)
+def test_f(commands, expected, capsys):
+    stack = StackMax()
+    for command in commands:
+        execute(command, stack)
+    captured = capsys.readouterr()
+    stdout = captured.out
+    assert stdout == expected
