@@ -11,6 +11,8 @@ from sprint2 import (
 )
 from sprint2.a_monitoring import transpose
 from sprint2.h_bracket_sequence import is_correct_bracket_seq
+from sprint2.k_rec_fibonacci import fib
+from sprint2.l_mod_fibonacci import fib_mod
 
 
 def test_a():
@@ -253,3 +255,22 @@ def test_j(commands, expected, capsys):
     captured = capsys.readouterr()
     stdout = captured.out
     assert stdout == expected
+
+
+def test_k():
+    assert fib(0) == 1
+    assert fib(1) == 1
+    assert fib(2) == 2
+    assert fib(3) == 3
+    assert fib(10) == 89
+
+
+def test_l():
+    assert fib_mod(0, 1) == 1
+    assert fib_mod(1, 1) == 1
+    assert fib_mod(2, 1) == 2
+    assert fib_mod(3, 1) == 3
+    assert fib_mod(10, 2) == 89
+    assert fib_mod(10, 4) == 89
+    assert fib_mod(100, 5) == 84101
+    assert fib_mod(10 ** 6, 8) == 26937501
