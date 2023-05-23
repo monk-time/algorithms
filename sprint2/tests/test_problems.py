@@ -5,9 +5,11 @@ from sprint2 import (
     c_tedious_work,
     d_caring_mother,
     e_reversed,
+    f_stack_max,
+    i_limited_queue,
+    j_list_queue,
 )
 from sprint2.a_monitoring import transpose
-from sprint2.f_stack_max import StackMax, execute
 from sprint2.h_bracket_sequence import is_correct_bracket_seq
 
 
@@ -154,9 +156,9 @@ def test_e():
     ),
 )
 def test_f(commands, expected, capsys):
-    stack = StackMax()
+    stack = f_stack_max.StackMax()
     for command in commands:
-        execute(command, stack)
+        f_stack_max.execute(command, stack)
     captured = capsys.readouterr()
     stdout = captured.out
     assert stdout == expected
@@ -180,3 +182,74 @@ def test_f(commands, expected, capsys):
 )
 def test_h(test_input, expected):
     assert is_correct_bracket_seq(test_input) == expected
+
+
+@pytest.mark.parametrize(
+    'max_size, commands, expected',
+    (
+        (
+            2,
+            (
+                'peek',
+                'push 5',
+                'push 2',
+                'peek',
+                'size',
+                'size',
+                'push 1',
+                'size',
+            ),
+            'None\n5\n2\n2\nerror\n2\n',
+        ),
+        (
+            1,
+            (
+                'push 3',
+                'size',
+                'push 4',
+                'size',
+                'push 5',
+                'pop',
+                'push 6',
+                'pop',
+            ),
+            '1\nerror\n1\nerror\n3\n6\n',
+        ),
+    ),
+)
+def test_i(max_size, commands, expected, capsys):
+    queue = i_limited_queue.MyQueueSized(max_size)
+    for command in commands:
+        i_limited_queue.execute(command, queue)
+    captured = capsys.readouterr()
+    stdout = captured.out
+    assert stdout == expected
+
+
+@pytest.mark.parametrize(
+    'commands, expected',
+    (
+        (
+            (
+                'put -34',
+                'put -23',
+                'get',
+                'size',
+                'get',
+                'size',
+                'get',
+                'get',
+                'put 80',
+                'size',
+            ),
+            '-34\n1\n-23\n0\nerror\nerror\n1\n',
+        ),
+    ),
+)
+def test_j(commands, expected, capsys):
+    queue = j_list_queue.ListQueue()
+    for command in commands:
+        j_list_queue.execute(command, queue)
+    captured = capsys.readouterr()
+    stdout = captured.out
+    assert stdout == expected

@@ -3,10 +3,10 @@ class StackMax:
         self._stack = []
         self._max = []
 
-    def push(self, x: int):
-        self._stack.append(x)
-        if not self._max or x >= self._max[-1]:
-            self._max.append(x)
+    def push(self, value: int):
+        self._stack.append(value)
+        if not self._max or value >= self._max[-1]:
+            self._max.append(value)
 
     def pop(self):
         if not self._stack:
@@ -26,7 +26,7 @@ def execute(command: str, stack: StackMax) -> None:
     method_name, *args = command.split()
     args = list(map(int, args))
     return_value = getattr(stack, method_name)(*args)
-    if return_value:
+    if return_value is not None:
         print(return_value)
 
 
