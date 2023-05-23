@@ -1,7 +1,7 @@
 from collections import deque
 
 
-class ListQueue:
+class ListQueueDeque:
     def __init__(self):
         self._queue = deque()
 
@@ -15,6 +15,40 @@ class ListQueue:
 
     def size(self):
         return len(self._queue)
+
+
+class Node:
+    def __init__(self, value, next_item: 'Node' = None):
+        self.value = value
+        self.next_item = next_item
+
+
+class ListQueue:
+    def __init__(self):
+        self.first = self.last = None
+        self.queue_size = 0
+
+    def put(self, value: int):
+        node = Node(value)
+        if not self.first:
+            self.first = node
+        else:
+            self.last.next_item = node
+        self.last = node
+        self.queue_size += 1
+
+    def get(self):
+        if not self.first:
+            return 'error'
+        if not self.first.next_item:
+            self.last = None
+        value = self.first.value
+        self.first = self.first.next_item
+        self.queue_size -= 1
+        return value  # noqa
+
+    def size(self):
+        return self.queue_size
 
 
 def execute(command: str, queue: ListQueue) -> None:

@@ -2,7 +2,7 @@ from itertools import count
 
 
 class Node:
-    def __init__(self, value, next_item=None):
+    def __init__(self, value, next_item: 'Node' = None):
         self.value = value
         self.next_item = next_item
 
