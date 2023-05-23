@@ -1,8 +1,14 @@
 import pytest
 
-from sprint2 import b_todo, c_tedious_work, d_caring_mother, e_reversed
+from sprint2 import (
+    b_todo,
+    c_tedious_work,
+    d_caring_mother,
+    e_reversed,
+)
 from sprint2.a_monitoring import transpose
 from sprint2.f_stack_max import StackMax, execute
+from sprint2.h_bracket_sequence import is_correct_bracket_seq
 
 
 def test_a():
@@ -154,3 +160,23 @@ def test_f(commands, expected, capsys):
     captured = capsys.readouterr()
     stdout = captured.out
     assert stdout == expected
+
+
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        ('()', True),
+        ('(())', True),
+        ('{[()]}', True),
+        ('()()()', True),
+        ('()[]{}', True),
+        ('([]){[]}((({})))', True),
+        ('(', False),
+        (')', False),
+        ('()[', False),
+        ('[{}(]', False),
+        (']()]', False),
+    ),
+)
+def test_h(test_input, expected):
+    assert is_correct_bracket_seq(test_input) == expected
