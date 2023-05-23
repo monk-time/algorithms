@@ -1,17 +1,17 @@
-from a_function_values import func
-from b_even_odd import check_parity
-from c_neighbors import neighbors, parse_matrix
-from d_weather import calc_chaos
-from e_longest_word import find_longest_word
-from f_palindrome import is_palindrome
-from final_nearest_zero import nearest_zeroes
-from final_sleight_of_hand import max_score
-from g_working_from_home import to_binary
-from h_binary import binary_sum
-from i_power_of_four import is_power_of_four
-from j_factorization import factorization
-from k_list_form import special_sum
-from l_extra_letter import extra_letter
+from sprint1.a_function_values import func
+from sprint1.b_even_odd import check_parity
+from sprint1.c_neighbors import neighbors, parse_matrix
+from sprint1.d_weather import calc_chaos
+from sprint1.e_longest_word import find_longest_word
+from sprint1.f_palindrome import is_palindrome
+from sprint1.final_nearest_zero import nearest_zeroes
+from sprint1.final_sleight_of_hand import max_score
+from sprint1.g_working_from_home import to_binary
+from sprint1.h_binary import binary_sum
+from sprint1.i_power_of_four import is_power_of_four
+from sprint1.j_factorization import factorization
+from sprint1.k_list_form import special_sum
+from sprint1.l_extra_letter import extra_letter
 
 
 def test_a():
