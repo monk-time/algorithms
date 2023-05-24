@@ -7,13 +7,6 @@ def bracket_gen(n: int, left: int = 0, right: int = 0, s: str = ''):
         yield from bracket_gen(n, left, right + 1, f'{s})')
 
 
-for n in range(11):
-    brackets = list(bracket_gen(n))
-    print(n, len(brackets))
-    assert brackets == sorted(brackets)
-    assert len(brackets) == len(set(brackets))
-
-
 if __name__ == '__main__':
     n = int(input())
     for s in bracket_gen(n):
