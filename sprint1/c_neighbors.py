@@ -3,26 +3,21 @@ from typing import List
 Matrix = List[List[int]]
 
 
-def parse_matrix(strs: List[str]) -> Matrix:
-    return [list(map(int, s.split())) for s in strs]
-
-
-def neighbors(matrix: Matrix, y: int, x: int) -> List[int]:
+def neighbors(matrix: Matrix, row: int, col: int) -> List[int]:
     rows = len(matrix)
     cols = len(matrix[0])
-    result = []
-    for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-        x2, y2 = x + dx, y + dy
-        if 0 <= x2 < cols and 0 <= y2 < rows:
-            result.append(matrix[y2][x2])
-    return sorted(result)
+    deltas = ((-1, 0), (1, 0), (0, -1), (0, 1))
+    coords = (tuple(map(sum, zip((row, col), d))) for d in deltas)
+    in_range = lambda t: 0 <= t[0] < rows and 0 <= t[1] < cols
+    get = lambda t: matrix[t[0]][t[1]]
+    return sorted(map(get, filter(in_range, coords)))
 
 
 if __name__ == '__main__':
     rows = int(input())
     cols = int(input())
-    matrix = parse_matrix(input() for _ in range(rows))
-    x = int(input())
-    y = int(input())
-    result = neighbors(matrix, x, y)
+    matrix = [list(map(int, input().split())) for _ in range(rows)]
+    row = int(input())
+    col = int(input())
+    result = neighbors(matrix, row, col)
     print(' '.join(map(str, result)))

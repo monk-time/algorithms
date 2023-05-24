@@ -1,6 +1,6 @@
 from sprint1.a_function_values import func
 from sprint1.b_even_odd import check_parity
-from sprint1.c_neighbors import neighbors, parse_matrix
+from sprint1.c_neighbors import neighbors
 from sprint1.d_weather import calc_chaos
 from sprint1.e_longest_word import find_longest_word
 from sprint1.f_palindrome import is_palindrome
@@ -26,14 +26,12 @@ def test_b():
 
 
 def test_c():
-    matrix = parse_matrix(
-        [
-            '1 2 3',
-            '0 2 6',
-            '7 4 1',
-            '2 7 0',
-        ]
-    )
+    matrix = [
+        [1, 2, 3],
+        [0, 2, 6],
+        [7, 4, 1],
+        [2, 7, 0],
+    ]
     assert neighbors(matrix, 3, 0) == [7, 7]
     assert neighbors(matrix, 0, 0) == [0, 2]
 

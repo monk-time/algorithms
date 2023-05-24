@@ -6,6 +6,7 @@ from sprint2 import (
     d_caring_mother,
     e_reversed,
     f_stack_max,
+    final_deque,
     i_limited_queue,
     j_list_queue,
 )
@@ -109,7 +110,11 @@ def test_e():
                 'get_max',
                 'get_max',
             ),
-            'None\n-2\n-2\n',
+            [
+                'None',
+                '-2',
+                '-2',
+            ],
         ),
         (
             (
@@ -126,7 +131,14 @@ def test_e():
                 'get_max',
                 'pop',
             ),
-            'error\n1\n1\n1\nNone\nerror\n',
+            [
+                'error',
+                '1',
+                '1',
+                '1',
+                'None',
+                'error',
+            ],
         ),
         (
             (
@@ -139,7 +151,11 @@ def test_e():
                 'pop',
                 'get_max',
             ),
-            'error\nerror\n4\n',
+            [
+                'error',
+                'error',
+                '4',
+            ],
         ),
         (
             (
@@ -153,7 +169,12 @@ def test_e():
                 'pop',
                 'push -2',
             ),
-            'None\nerror\nNone\n2\n',
+            [
+                'None',
+                'error',
+                'None',
+                '2',
+            ],
         ),
     ),
 )
@@ -161,9 +182,7 @@ def test_f(commands, expected, capsys):
     stack = f_stack_max.StackMax()
     for command in commands:
         f_stack_max.execute(command, stack)
-    captured = capsys.readouterr()
-    stdout = captured.out
-    assert stdout == expected
+    assert capsys.readouterr().out.split() == expected
 
 
 @pytest.mark.parametrize(
@@ -201,7 +220,14 @@ def test_h(test_input, expected):
                 'push 1',
                 'size',
             ),
-            'None\n5\n2\n2\nerror\n2\n',
+            [
+                'None',
+                '5',
+                '2',
+                '2',
+                'error',
+                '2',
+            ],
         ),
         (
             1,
@@ -215,7 +241,14 @@ def test_h(test_input, expected):
                 'push 6',
                 'pop',
             ),
-            '1\nerror\n1\nerror\n3\n6\n',
+            [
+                '1',
+                'error',
+                '1',
+                'error',
+                '3',
+                '6',
+            ],
         ),
     ),
 )
@@ -223,9 +256,7 @@ def test_i(max_size, commands, expected, capsys):
     queue = i_limited_queue.MyQueueSized(max_size)
     for command in commands:
         i_limited_queue.execute(command, queue)
-    captured = capsys.readouterr()
-    stdout = captured.out
-    assert stdout == expected
+    assert capsys.readouterr().out.split() == expected
 
 
 @pytest.mark.parametrize(
@@ -244,7 +275,15 @@ def test_i(max_size, commands, expected, capsys):
                 'put 80',
                 'size',
             ),
-            '-34\n1\n-23\n0\nerror\nerror\n1\n',
+            [
+                '-34',
+                '1',
+                '-23',
+                '0',
+                'error',
+                'error',
+                '1',
+            ],
         ),
     ),
 )
@@ -252,9 +291,7 @@ def test_j(commands, expected, capsys):
     queue = j_list_queue.ListQueue()
     for command in commands:
         j_list_queue.execute(command, queue)
-    captured = capsys.readouterr()
-    stdout = captured.out
-    assert stdout == expected
+    assert capsys.readouterr().out.split() == expected
 
 
 def test_k():
@@ -273,4 +310,60 @@ def test_l():
     assert fib_mod(10, 2) == 89
     assert fib_mod(10, 4) == 89
     assert fib_mod(100, 5) == 84101
-    assert fib_mod(10 ** 6, 8) == 26937501
+    assert fib_mod(10**6, 8) == 26937501
+
+
+@pytest.mark.parametrize(
+    'max_size, commands, expected',
+    (
+        (
+            4,
+            (
+                'push_front 861',
+                'push_front -819',
+                'pop_back',
+                'pop_back',
+            ),
+            [
+                '861',
+                '-819',
+            ],
+        ),
+        (
+            4,
+            (
+                'pop_front',
+                'pop_back',
+                'push_back 2',
+                'push_front 1',
+                'push_back 3',
+                'push_front 0',
+                'pop_back',
+                'pop_front',
+                'push_back 4',
+                'push_front -1',
+                'pop_front',
+                'pop_front',
+                'pop_front',
+                'pop_front',
+                'pop_front',
+            ),
+            [
+                'error',
+                'error',
+                '3',
+                '0',
+                '-1',
+                '1',
+                '2',
+                '4',
+                'error',
+            ]
+        )
+    ),
+)
+def test_deque(max_size, commands, expected, capsys):
+    queue = final_deque.Deque(max_size)
+    for command in commands:
+        final_deque.execute(command, queue)
+    assert capsys.readouterr().out.split() == expected
