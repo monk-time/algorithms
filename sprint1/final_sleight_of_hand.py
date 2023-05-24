@@ -12,9 +12,6 @@ def max_score(field: List[str], k: int) -> int:
 
 
 if __name__ == '__main__':
-    try:
-        k = int(input())
-    except ValueError:
-        raise ValueError('Необходимо ввести целочисленное значение')
+    k = int(input())
     field = [input() for _ in range(4)]
     print(max_score(field, k))
