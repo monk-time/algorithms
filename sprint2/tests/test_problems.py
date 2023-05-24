@@ -11,6 +11,7 @@ from sprint2 import (
     j_list_queue,
 )
 from sprint2.a_monitoring import transpose
+from sprint2.final_calc import calc
 from sprint2.h_bracket_sequence import is_correct_bracket_seq
 from sprint2.k_rec_fibonacci import fib
 from sprint2.l_mod_fibonacci import fib_mod
@@ -358,12 +359,23 @@ def test_l():
                 '2',
                 '4',
                 'error',
-            ]
-        )
+            ],
+        ),
     ),
 )
-def test_deque(max_size, commands, expected, capsys):
+def test_final_deque(max_size, commands, expected, capsys):
     queue = final_deque.Deque(max_size)
     for command in commands:
         final_deque.execute(command, queue)
     assert capsys.readouterr().out.split() == expected
+
+
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        ('2 1 + 3 *', 9),
+        ('2 5 * 3 - 2 /', 3),
+    ),
+)
+def test_final_calc(test_input, expected):
+    assert calc(test_input) == expected
