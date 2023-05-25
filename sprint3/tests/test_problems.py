@@ -2,6 +2,8 @@ from sprint3.a_bracket_gen import bracket_gen
 from sprint3.b_combinations import phone_combinations
 from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
+from sprint3.e_houses import count_houses
+from sprint3.f_triangle import max_perimeter
 
 
 def test_a():
@@ -38,3 +40,13 @@ def test_d():
     assert count_happy([1, 2], [2, 1, 3]) == 2
     assert count_happy([2, 1, 3], [1, 1]) == 1
     assert count_happy([1, 1, 1, 5, 7], [1, 1, 2, 3, 3, 3, 6]) == 4
+
+
+def test_e():
+    assert count_houses([999, 999, 999], 300) == 0
+    assert count_houses([350, 999, 200], 1000) == 2
+
+
+def test_f():
+    assert max_perimeter([6, 3, 3, 2]) == 8
+    assert max_perimeter([5, 3, 7, 2, 8, 3]) == 20
