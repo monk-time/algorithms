@@ -11,7 +11,8 @@ from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
 from sprint3.j_bubble import run_bubble_sort
 from sprint3.k_merge_sort import merge_sort
-from sprint3.l_two_bicycles import left_binary_search_mod
+from sprint3.l_two_bicycles import bisect
+from sprint3.n_flowerbeds import union
 
 
 def test_a():
@@ -123,19 +124,15 @@ def test_k():
 
 def test_l():
     a = [1, 2, 4, 4, 6, 8]
-    assert left_binary_search_mod(a, k=3, left=0, right=len(a)) == 3
-    assert left_binary_search_mod(a, k=6, left=0, right=len(a)) == 5
+    assert bisect(a, 3) == 3
+    assert bisect(a, 6) == 5
     a = [0, 1, 1, 1]
-    assert left_binary_search_mod(a, k=1, left=0, right=len(a)) == 2
-    a = [0, 1, 1, 1]
-    assert left_binary_search_mod(a, k=1, left=1, right=len(a)) == 2
-    a = [0, 1, 1, 1]
-    assert left_binary_search_mod(a, k=1, left=2, right=len(a)) == 3
-    a = [0, 1, 1, 1]
-    assert left_binary_search_mod(a, k=1, left=0, right=1) == -1
-    a = [0, 1, 1, 1]
-    assert left_binary_search_mod(a, k=1, left=0, right=2) == 2
+    assert bisect(a, 1) == 2
     a = [0, 1, 2, 2, 2, 3, 4]
-    assert left_binary_search_mod(a, k=2, left=0, right=len(a)) == 3
+    assert bisect(a, 2) == 3
     a = [0, 1, 2]
-    assert left_binary_search_mod(a, k=3, left=0, right=len(a)) == -1
+    assert bisect(a, 3) == -1
+
+
+def test_n():
+    assert list(union([[7, 8], [7, 8], [2, 3], [6, 10]])) == [[2, 3], [6, 10]]

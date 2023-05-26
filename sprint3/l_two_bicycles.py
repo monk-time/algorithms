@@ -1,3 +1,4 @@
+from bisect import bisect_left
 from typing import List
 
 
@@ -26,6 +27,11 @@ def left_binary_search_mod(a: List[int], k: int, left: int, right: int) -> int:
         else:
             left = mid
     return left + DAY_OFFSET if a[left] >= k else -1
+
+
+def bisect(a: List[int], k: int) -> int:
+    pos = bisect_left(a, k)
+    return pos + DAY_OFFSET if pos < len(a) else -1
 
 
 if __name__ == '__main__':
