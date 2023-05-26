@@ -59,6 +59,7 @@ def test_g():
 
 def test_h():
     assert binary_sum('1010', '1011') == '10101'
+    assert binary_sum('111', '10') == '1001'
     assert binary_sum('1', '1000') == '1001'
     assert binary_sum('1', '1') == '10'
     assert binary_sum('1', '0') == '1'
