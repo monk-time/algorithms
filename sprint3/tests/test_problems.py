@@ -1,3 +1,4 @@
+from itertools import cycle, islice
 import pytest
 
 from sprint3.a_bracket_gen import bracket_gen
@@ -6,6 +7,7 @@ from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
 from sprint3.e_houses import count_houses
 from sprint3.f_triangle import max_perimeter
+from sprint3.final_search_in_broken_list import search_in_shifted
 from sprint3.g_wardrobe import count_colors
 from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
@@ -143,3 +145,12 @@ def test_n():
         [1, 5],
         [6, 8],
     ]
+
+
+def test_final_search_in_broken_list():
+    assert search_in_shifted([19, 21, 100, 101, 1, 4, 5, 7, 12], 5) == 6
+    n = 10
+    lists = [list(islice(cycle(range(1, 1 + n)), i, i + n)) for i in range(n)]
+    for a in lists:
+        for i, value in enumerate(a):
+            assert search_in_shifted(a, value) == i
