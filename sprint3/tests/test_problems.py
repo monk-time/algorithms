@@ -4,6 +4,9 @@ from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
 from sprint3.e_houses import count_houses
 from sprint3.f_triangle import max_perimeter
+from sprint3.g_wardrobe import count_colors
+from sprint3.h_large_number import largest_number
+from sprint3.i_conference_fans import top_k_schools
 
 
 def test_a():
@@ -50,3 +53,18 @@ def test_e():
 def test_f():
     assert max_perimeter([6, 3, 3, 2]) == 8
     assert max_perimeter([5, 3, 7, 2, 8, 3]) == 20
+
+
+def test_g():
+    assert list(count_colors([0, 2, 1, 2, 0, 0, 1])) == [0, 0, 0, 1, 1, 2, 2]
+
+
+def test_h():
+    assert largest_number(['15', '56', '2']) == '56215'
+    assert largest_number(['1', '783', '2']) == '78321'
+
+
+def test_i():
+    assert top_k_schools([1, 2, 3, 1, 2, 3, 4], 3) == [1, 2, 3]
+    assert top_k_schools([3, 2, 1, 3, 1, 2, 5, 4], 4) == [1, 2, 3, 4]
+    assert top_k_schools([2, 1], 1) == [1]
