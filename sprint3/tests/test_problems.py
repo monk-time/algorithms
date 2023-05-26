@@ -13,7 +13,7 @@ from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
 from sprint3.j_bubble import run_bubble_sort
 from sprint3.k_merge_sort import merge_sort
-from sprint3.l_two_bicycles import bisect
+from sprint3.l_two_bicycles import bisect, left_binary_search_mod
 from sprint3.n_flowerbeds import union
 
 
@@ -124,16 +124,17 @@ def test_k():
     assert a == [0, 0, 1, 2, 3, 3, 4, 5]
 
 
-def test_l():
+@pytest.mark.parametrize('function', (bisect, left_binary_search_mod))
+def test_l(function):
     a = [1, 2, 4, 4, 6, 8]
-    assert bisect(a, 3) == 3
-    assert bisect(a, 6) == 5
+    assert function(a, 3) == 3
+    assert function(a, 6) == 5
     a = [0, 1, 1, 1]
-    assert bisect(a, 1) == 2
+    assert function(a, 1) == 2
     a = [0, 1, 2, 2, 2, 3, 4]
-    assert bisect(a, 2) == 3
+    assert function(a, 2) == 3
     a = [0, 1, 2]
-    assert bisect(a, 3) == -1
+    assert function(a, 3) == -1
 
 
 def test_n():
