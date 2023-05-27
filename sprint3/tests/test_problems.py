@@ -1,5 +1,7 @@
+import random
+from io import StringIO
 from itertools import cycle, islice
-from random import choices
+
 import pytest
 
 from sprint3.a_bracket_gen import bracket_gen
@@ -8,7 +10,7 @@ from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
 from sprint3.e_houses import count_houses
 from sprint3.f_triangle import max_perimeter
-from sprint3.final_quicksort_inplace import quicksort, quicksort_inplace
+from sprint3.final_efficient_quicksort import main, quicksort
 from sprint3.final_search_in_broken_list import search_in_shifted
 from sprint3.g_wardrobe import count_colors
 from sprint3.h_large_number import largest_number
@@ -167,18 +169,58 @@ def test_final_search_in_broken_list():
             assert search_in_shifted(a, value) == i
 
 
-def test_final_quicksort_inplace():
-    assert quicksort_inplace([]) == []
-    assert quicksort_inplace([1]) == [1]
-    assert quicksort_inplace([1, 1]) == [1, 1]
-    assert quicksort_inplace([1, 2]) == [1, 2]
-    assert quicksort_inplace([2, 1]) == [1, 2]
-    assert quicksort_inplace([5, 1, 3, 4, 2]) == [1, 2, 3, 4, 5]
-    assert quicksort_inplace([1, 3, 1, 4, 0]) == [0, 1, 1, 3, 4]
-    a = [5, 1, 1, 2, 4, 2, 6, 0, 0]
-    assert quicksort_inplace(a) == [0, 0, 1, 1, 2, 2, 4, 5, 6]
+@pytest.mark.parametrize(
+    'test_input',
+    (
+        [],
+        [1],
+        [1, 1],
+        [1, 2],
+        [2, 1],
+        [5, 1, 3, 4, 2],
+        [1, 3, 1, 4, 0],
+        [5, 1, 1, 2, 4, 2, 6, 0, 0],
+    ),
+)
+def test_quicksort(test_input):
+    expected = sorted(test_input)
+    quicksort(test_input)
+    assert test_input == expected
 
+
+def test_quicksort_random():
+    random.seed(1)
     for _ in range(1000):
-        a = choices(range(10), k=20)
-        assert sorted(a) == quicksort(a)
-        assert sorted(a) == quicksort_inplace(a[:])
+        a = random.choices(range(10), k=50)
+        expected = sorted(a)
+        quicksort(a)
+        assert a == expected
+
+
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        (
+            [
+                '5',
+                'alla 4 100',
+                'gena 6 1000',
+                'gosha 2 90',
+                'rita 2 90',
+                'timofey 4 80',
+            ],
+            [
+                'gena',
+                'timofey',
+                'alla',
+                'gosha',
+                'rita',
+            ],
+        ),
+    ),
+)
+def test_final_efficient_quicksort(test_input, expected, monkeypatch, capsys):
+    inputs = StringIO('\n'.join(test_input))
+    monkeypatch.setattr('sys.stdin', inputs)
+    main()
+    assert capsys.readouterr().out.strip().split('\n') == expected
