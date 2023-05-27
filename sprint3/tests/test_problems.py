@@ -1,4 +1,5 @@
 from itertools import cycle, islice
+from random import choices
 import pytest
 
 from sprint3.a_bracket_gen import bracket_gen
@@ -7,6 +8,7 @@ from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
 from sprint3.e_houses import count_houses
 from sprint3.f_triangle import max_perimeter
+from sprint3.final_quicksort_inplace import quicksort, quicksort_inplace
 from sprint3.final_search_in_broken_list import search_in_shifted
 from sprint3.g_wardrobe import count_colors
 from sprint3.h_large_number import largest_number
@@ -163,3 +165,20 @@ def test_final_search_in_broken_list():
     for a in lists:
         for i, value in enumerate(a):
             assert search_in_shifted(a, value) == i
+
+
+def test_final_quicksort_inplace():
+    assert quicksort_inplace([]) == []
+    assert quicksort_inplace([1]) == [1]
+    assert quicksort_inplace([1, 1]) == [1, 1]
+    assert quicksort_inplace([1, 2]) == [1, 2]
+    assert quicksort_inplace([2, 1]) == [1, 2]
+    assert quicksort_inplace([5, 1, 3, 4, 2]) == [1, 2, 3, 4, 5]
+    assert quicksort_inplace([1, 3, 1, 4, 0]) == [0, 1, 1, 3, 4]
+    a = [5, 1, 1, 2, 4, 2, 6, 0, 0]
+    assert quicksort_inplace(a) == [0, 0, 1, 1, 2, 2, 4, 5, 6]
+
+    for _ in range(1000):
+        a = choices(range(10), k=20)
+        assert sorted(a) == quicksort(a)
+        assert sorted(a) == quicksort_inplace(a[:])
