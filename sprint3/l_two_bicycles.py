@@ -2,7 +2,8 @@ from bisect import bisect_left
 from typing import List
 
 
-def binary_search(a: List[int], k: int, left: int, right: int) -> int:
+def binary_search(a: List[int], k: int) -> int:
+    left, right = 0, len(a)
     while left < right:
         mid = (left + right) // 2
         if a[mid] == k:
@@ -10,7 +11,7 @@ def binary_search(a: List[int], k: int, left: int, right: int) -> int:
         if a[mid] > k:
             right = mid
         else:
-            left = mid
+            left = mid + 1
     return -1
 
 
@@ -26,7 +27,20 @@ def left_binary_search_mod(a: List[int], k: int) -> int:
                 return mid + DAY_OFFSET
             right = mid
         else:
-            left = mid if left < mid else right
+            left = mid + 1
+    return -1
+
+
+def left_binary_search_mod2(a: List[int], k: int) -> int:
+    left, right = 0, len(a) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if a[mid] >= k:
+            if left == mid:
+                return mid + DAY_OFFSET
+            right = mid
+        else:
+            left = mid + 1
     return -1
 
 

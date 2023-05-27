@@ -14,7 +14,7 @@ def search_in_shifted(a: List[int], value: int) -> int:
         ):
             right = mid
         else:
-            left = mid
+            left = mid + 1
     return -1
 
 

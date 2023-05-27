@@ -13,7 +13,11 @@ from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
 from sprint3.j_bubble import run_bubble_sort
 from sprint3.k_merge_sort import merge_sort
-from sprint3.l_two_bicycles import bisect, left_binary_search_mod
+from sprint3.l_two_bicycles import (
+    bisect,
+    left_binary_search_mod,
+    left_binary_search_mod2,
+)
 from sprint3.n_flowerbeds import union
 
 
@@ -124,7 +128,9 @@ def test_k():
     assert a == [0, 0, 1, 2, 3, 3, 4, 5]
 
 
-@pytest.mark.parametrize('function', (bisect, left_binary_search_mod))
+@pytest.mark.parametrize(
+    'function', (bisect, left_binary_search_mod, left_binary_search_mod2)
+)
 def test_l(function):
     assert function([], 1) == -1
     assert function([0], 1) == -1
@@ -149,6 +155,9 @@ def test_n():
 
 def test_final_search_in_broken_list():
     assert search_in_shifted([19, 21, 100, 101, 1, 4, 5, 7, 12], 5) == 6
+    assert search_in_shifted([], 1) == -1
+    assert search_in_shifted([0], 1) == -1
+    assert search_in_shifted([1], 1) == 0
     n = 10
     lists = [list(islice(cycle(range(1, 1 + n)), i, i + n)) for i in range(n)]
     for a in lists:
