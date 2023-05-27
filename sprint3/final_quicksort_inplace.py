@@ -14,23 +14,27 @@ def quicksort(a: List[int]) -> List[int]:
     return quicksort(left) + [pivot] + quicksort(right)
 
 
-def quicksort_inplace_rec(a: List[int], first: int, last: int) -> None:
-    if first >= last:
-        return
-    pivot = a[(first + last) // 2]
-    left, right = first, last
+def partition(a: List[int], start: int, end: int) -> int:
+    pivot = a[(start + end) // 2]
+    left, right = start, end
     while True:
         while a[left] < pivot:
             left += 1
         while a[right] > pivot:
             right -= 1
         if left >= right:
-            break
+            return right
         a[left], a[right] = a[right], a[left]
         left += 1
         right -= 1
-    quicksort_inplace_rec(a, first, right)
-    quicksort_inplace_rec(a, right + 1, last)
+
+
+def quicksort_inplace_rec(a: List[int], start: int, end: int) -> None:
+    if start >= end:
+        return
+    parts_border = partition(a, start, end)
+    quicksort_inplace_rec(a, start, parts_border)
+    quicksort_inplace_rec(a, parts_border + 1, end)
 
 
 def quicksort_inplace(a: List[int]) -> List[int]:
