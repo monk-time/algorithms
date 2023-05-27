@@ -126,15 +126,14 @@ def test_k():
 
 @pytest.mark.parametrize('function', (bisect, left_binary_search_mod))
 def test_l(function):
-    a = [1, 2, 4, 4, 6, 8]
-    assert function(a, 3) == 3
-    assert function(a, 6) == 5
-    a = [0, 1, 1, 1]
-    assert function(a, 1) == 2
-    a = [0, 1, 2, 2, 2, 3, 4]
-    assert function(a, 2) == 3
-    a = [0, 1, 2]
-    assert function(a, 3) == -1
+    assert function([], 1) == -1
+    assert function([0], 1) == -1
+    assert function([1], 1) == 1
+    assert function([1, 2, 4, 4, 6, 8], 3) == 3
+    assert function([1, 2, 4, 4, 6, 8], 6) == 5
+    assert function([0, 1, 1, 1], 1) == 2
+    assert function([0, 1, 2, 2, 2, 3, 4], 2) == 3
+    assert function([0, 1, 2], 3) == -1
 
 
 def test_n():

@@ -19,15 +19,15 @@ DAY_OFFSET = 1
 
 def left_binary_search_mod(a: List[int], k: int) -> int:
     left, right = 0, len(a)
-    while left < right - 1:
+    while left < right:
         mid = (left + right) // 2
         if a[mid] >= k:
-            if a[mid - 1] < k:
+            if mid == 0 or a[mid - 1] < k:
                 return mid + DAY_OFFSET
             right = mid
         else:
-            left = mid
-    return left + DAY_OFFSET if a[left] >= k else -1
+            left = mid if left < mid else right
+    return -1
 
 
 def bisect(a: List[int], k: int) -> int:
