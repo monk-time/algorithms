@@ -21,5 +21,4 @@ def nearest_zeroes(numbers: List[int]) -> List[int]:
 if __name__ == '__main__':
     n = int(input())
     houses = [int(x) for x in input().split()]
-    distances = nearest_zeroes(houses)
-    print(' '.join(map(str, distances)))
+    print(*nearest_zeroes(houses))
