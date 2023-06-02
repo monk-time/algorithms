@@ -1,23 +1,37 @@
-"""ID посылки: 87897803."""
+"""ID посылки: 87911546."""
+
+
+import operator
 
 
 OPERATIONS = {
-    '+': lambda a, b: a + b,
-    '-': lambda a, b: a - b,
-    '*': lambda a, b: a * b,
-    '/': lambda a, b: a // b,
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.floordiv,
 }
 
 
+class Stack:
+    def __init__(self):
+        self._items = []
+
+    def push(self, item):
+        self._items.append(item)
+
+    def pop(self):
+        return self._items.pop()
+
+
 def calc(expression: str) -> int:
-    stack = []
+    stack = Stack()
     for token in expression.split():
         if token not in OPERATIONS:
-            stack.append(int(token))
+            stack.push(int(token))
             continue
-        b, a = stack.pop(), stack.pop()
-        stack.append(OPERATIONS[token](a, b))
-    return stack[-1]
+        right, left = stack.pop(), stack.pop()
+        stack.push(OPERATIONS[token](left, right))
+    return stack.pop()
 
 
 if __name__ == '__main__':
