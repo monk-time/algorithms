@@ -7,6 +7,5 @@ def fib_mod(n: int, k: int) -> int:
 
 
 if __name__ == '__main__':
-    print(fib_mod(10 ** 6, 8))
     n, k = map(int, input().split())
     print(fib_mod(n, k))
