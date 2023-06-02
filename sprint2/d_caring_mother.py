@@ -7,7 +7,7 @@ class Node:
         self.next_item = next_item
 
 
-def solution(node: Node, value):
+def find(node: Node, value):
     i = 0
     while node:
         if node.value == value:
@@ -17,7 +17,7 @@ def solution(node: Node, value):
     return -1
 
 
-def solution_iter(head: Node, value):
+def find_iter(head: Node, value):
     def node_iter(node):
         while node:
             yield node
@@ -25,3 +25,12 @@ def solution_iter(head: Node, value):
 
     enumerated = zip(count(), node_iter(head))
     return next((i for i, node in enumerated if node.value == value), -1)
+
+
+if __name__ == '__main__':
+    n = int(input())
+    node = None
+    for _ in range(n):
+        node = Node(value=input(), next_item=node)
+    value = input()
+    print(find(node, value))
