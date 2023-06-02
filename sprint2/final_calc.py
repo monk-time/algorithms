@@ -1,4 +1,4 @@
-"""ID посылки: XXXXXX."""
+"""ID посылки: 87897803."""
 
 
 OPERATIONS = {
@@ -11,15 +11,14 @@ OPERATIONS = {
 
 def calc(expression: str) -> int:
     stack = []
-    for s in expression.split():
-        if s not in OPERATIONS:
-            stack.append(int(s))
+    for token in expression.split():
+        if token not in OPERATIONS:
+            stack.append(int(token))
             continue
         b, a = stack.pop(), stack.pop()
-        stack.append(OPERATIONS[s](a, b))
-    return stack.pop()
+        stack.append(OPERATIONS[token](a, b))
+    return stack[-1]
 
 
 if __name__ == '__main__':
-    expression = input()
-    print(calc(expression))
+    print(calc(input()))

@@ -1,4 +1,4 @@
-"""ID посылки: 87897691."""
+"""ID посылки: 87898143."""
 
 
 class DequeSizeError(Exception):
@@ -14,11 +14,11 @@ class Deque:
 
     def _check_full(self):
         if self._size == self._max_size:
-            raise DequeSizeError()
+            raise DequeSizeError('Max deque size reached')
 
     def _check_empty(self):
         if self._size == 0:
-            raise DequeSizeError()
+            raise DequeSizeError('Deque is empty')
 
     def push_front(self, value: int):
         self._check_full()
@@ -47,21 +47,20 @@ class Deque:
         return value  # noqa
 
 
-def execute(command: str, queue: Deque) -> None:
-    method_name, *args = command.split()
-    args = map(int, args)
-    try:
-        return_value = getattr(queue, method_name)(*args)
-        if return_value is not None:
-            print(return_value)
-    except DequeSizeError:
-        print('error')
-
-
-if __name__ == '__main__':
+def main():
     n = int(input())
     max_size = int(input())
     deque = Deque(max_size)
     for _ in range(n):
-        command = input()
-        execute(command, deque)
+        method_name, *args = input().split()
+        args = map(int, args)
+        try:
+            return_value = getattr(deque, method_name)(*args)
+            if return_value is not None:
+                print(return_value)
+        except DequeSizeError:
+            print('error')
+
+
+if __name__ == '__main__':
+    main()

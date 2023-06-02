@@ -1,3 +1,5 @@
+from io import StringIO
+
 import pytest
 
 from sprint2 import (
@@ -317,11 +319,11 @@ def test_l():
 
 
 @pytest.mark.parametrize(
-    'max_size, commands, expected',
+    'test_input, expected',
     (
         (
-            4,
             (
+                '4',
                 'push_front 861',
                 'push_front -819',
                 'pop_back',
@@ -333,8 +335,8 @@ def test_l():
             ],
         ),
         (
-            4,
             (
+                '4',
                 'pop_front',
                 'pop_back',
                 'push_back 2',
@@ -365,10 +367,10 @@ def test_l():
         ),
     ),
 )
-def test_final_deque(max_size, commands, expected, capsys):
-    queue = final_deque.Deque(max_size)
-    for command in commands:
-        final_deque.execute(command, queue)
+def test_final_deque(test_input, expected, monkeypatch, capsys):
+    inputs = StringIO('\n'.join(test_input))
+    monkeypatch.setattr('sys.stdin', inputs)
+    final_deque.main()
     assert capsys.readouterr().out.split() == expected
 
 
