@@ -10,5 +10,4 @@ def binary_sum(a: str, b: str) -> str:
 
 
 if __name__ == '__main__':
-    a, b = input(), input()
-    print(binary_sum(a, b))
+    print(binary_sum(input(), input()))
