@@ -13,7 +13,8 @@ class Deque:
     def __init__(self, max_size: int):
         self._max_size = max_size
         self._deque = [None] * max_size
-        self._head = self._tail = 0
+        self._first = 1
+        self._last = 0
         self._size = 0
 
     def _check_full(self):
@@ -26,27 +27,27 @@ class Deque:
 
     def push_front(self, value: int):
         self._check_full()
-        self._head = (self._head - 1) % self._max_size
-        self._deque[self._head] = value
+        self._first = (self._first - 1) % self._max_size
+        self._deque[self._first] = value
         self._size += 1
 
     def push_back(self, value: int):
         self._check_full()
-        self._deque[self._tail] = value
-        self._tail = (self._tail + 1) % self._max_size
+        self._last = (self._last + 1) % self._max_size
+        self._deque[self._last] = value
         self._size += 1
 
     def pop_front(self):
         self._check_empty()
-        value = self._deque[self._head]
-        self._head = (self._head + 1) % self._max_size
+        value = self._deque[self._first]
+        self._first = (self._first + 1) % self._max_size
         self._size -= 1
         return value  # noqa
 
     def pop_back(self):
         self._check_empty()
-        self._tail = (self._tail - 1) % self._max_size
-        value = self._deque[self._tail]
+        value = self._deque[self._last]
+        self._last = (self._last - 1) % self._max_size
         self._size -= 1
         return value  # noqa
 
