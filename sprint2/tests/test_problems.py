@@ -324,6 +324,7 @@ def test_l():
         (
             (
                 '4',
+                '4',
                 'push_front 861',
                 'push_front -819',
                 'pop_back',
@@ -336,6 +337,7 @@ def test_l():
         ),
         (
             (
+                '15',
                 '4',
                 'pop_front',
                 'pop_back',
