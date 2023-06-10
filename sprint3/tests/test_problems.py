@@ -16,7 +16,7 @@ from sprint3.g_wardrobe import count_colors
 from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
 from sprint3.j_bubble import run_bubble_sort
-from sprint3.k_merge_sort import merge_sort
+from sprint3.k_merge_sort import merge, merge_sort
 from sprint3.l_two_bicycles import (
     bisect,
     left_binary_search_mod,
@@ -130,6 +130,12 @@ def test_k():
     a = [5, 2, 3, 1, 0, 3, 4, 0]
     merge_sort(a, 0, len(a))
     assert a == [0, 0, 1, 2, 3, 3, 4, 5]
+
+    a = [1, 4, 9, 2, 10, 11]
+    assert merge(a, 0, 3, 6) == [1, 2, 4, 9, 10, 11]
+    a = [1, 4, 2, 10, 1, 2]
+    merge_sort(a, 0, 6)
+    assert a == [1, 1, 2, 2, 4, 10]
 
 
 @pytest.mark.parametrize(
