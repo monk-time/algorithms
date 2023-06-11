@@ -99,7 +99,7 @@ def test_final_nearest_zeroes():
 
 
 def test_final_sleight_of_hand():
-    assert max_score(['1231', '2..2', '2..2', '2..2'], 2) == 2
+    assert max_score(['1231', '2..2', '2..2', '2..2'], 3) == 2
     assert max_score(['1111', '9999', '1111', '9911'], 4) == 1
     assert max_score(['1111', '1111', '1111', '1111'], 4) == 0
     assert max_score(['1999', '5436', '4368', '1712'], 1) == 7
