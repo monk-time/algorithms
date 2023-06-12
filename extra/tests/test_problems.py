@@ -3,6 +3,8 @@ import pytest
 from extra.a_steps import steps
 from extra.b_canonical_path import get_canonical_path
 from extra.c_buy_sell import find_max_difference
+from extra.d_time_difference import min_gap
+from extra.e_break_palindrome import break_palindrome
 
 
 @pytest.mark.parametrize(
@@ -50,3 +52,35 @@ def test_b(test_input, expected):
 )
 def test_c(test_input, expected):
     assert find_max_difference(test_input) == expected
+
+
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        (['23:59', '00:00'], 1),
+        (['00:00', '23:59', '00:00'], 0),
+        (['23:30', '00:30'], 60),
+        (['14:40', '14:51'], 11),
+        (['14:40', '15:51', '20:00'], 71),
+    ),
+)
+def test_d(test_input, expected):
+    assert min_gap(test_input) == expected
+
+
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        ('abba', 'aaba'),
+        ('a', ''),
+        ('bbb', 'abb'),
+        ('cadac', 'aadac'),
+        ('adda', 'aada'),
+        ('d', ''),
+        ('', ''),
+        ('aaaa', 'aaab'),
+        ('ada', 'adb'),
+    ),
+)
+def test_e(test_input, expected):
+    assert break_palindrome(test_input) == expected
