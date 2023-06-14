@@ -8,14 +8,10 @@ def get_canonical_path_cheat(s: str) -> str:
 def get_canonical_path(s: str) -> str:
     parts = []
     for part in s.split('/'):
-        match part:
-            case '' | '.':
-                pass
-            case '..':
-                if parts:
-                    parts.pop()
-            case _:
-                parts.append(part)
+        if part == '..' and parts:
+            parts.pop()
+        elif part not in ('', '.', '..'):
+            parts.append(part)
     return '/' + '/'.join(parts)
 
 
