@@ -1,7 +1,7 @@
 from itertools import product
 
 
-BUTTONS = {
+LETTERS = {
     '2': 'abc',
     '3': 'def',
     '4': 'ghi',
@@ -13,12 +13,19 @@ BUTTONS = {
 }
 
 
-def phone_combinations(s: str):
-    pressed_buttons = (BUTTONS[ch] for ch in s)
+def phone_combinations(buttons: str):
+    pressed_buttons = (LETTERS[b] for b in buttons)
     for comb in product(*pressed_buttons):
         yield ''.join(comb)
 
 
+def phone_combinations_rec(buttons: str, acc: str = ''):
+    if len(acc) == len(buttons):
+        yield acc
+        return
+    for letter in LETTERS[buttons[len(acc)]]:
+        yield from phone_combinations_rec(buttons, acc + letter)
+
+
 if __name__ == '__main__':
-    s = input()
-    print(*phone_combinations(s))
+    print(*phone_combinations(input()))

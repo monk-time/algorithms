@@ -5,12 +5,12 @@ def union(segments: List[List[int]]) -> List[List[int]]:
     segments.sort()
     i = 0
     while i < len(segments):
-        a, b = segments[i]
+        left, right = segments[i]
         j = i + 1
-        while j < len(segments) and segments[j][0] <= b:
-            b = max(b, segments[j][1])
+        while j < len(segments) and segments[j][0] <= right:
+            right = max(right, segments[j][1])
             j += 1
-        yield [a, b]
+        yield [left, right]
         i = j
 
 

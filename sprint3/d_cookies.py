@@ -1,11 +1,11 @@
 from typing import List
 
 
-def count_happy(greed: List[int], cookie_sizes: List[int]):
+def count_happy(greed: List[int], cookies: List[int]):
     greed.sort()
-    cookie_sizes.sort()
+    cookies.sort()
     i = 0
-    for cookie in cookie_sizes:
+    for cookie in cookies:
         if cookie < greed[i]:
             continue
         i += 1
@@ -18,5 +18,5 @@ if __name__ == '__main__':
     n = int(input())
     greed = list(map(int, input().split()))
     m = int(input())
-    cookie_sizes = list(map(int, input().split()))
-    print(count_happy(greed, cookie_sizes))
+    cookies = list(map(int, input().split()))
+    print(count_happy(greed, cookies))

@@ -5,14 +5,14 @@ from itertools import cycle, islice
 import pytest
 
 from sprint3.a_bracket_gen import bracket_gen
-from sprint3.b_combinations import phone_combinations
+from sprint3.b_combinations import phone_combinations, phone_combinations_rec
 from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
-from sprint3.e_houses import count_houses
+from sprint3.e_houses import count_houses, count_houses_acc
 from sprint3.f_triangle import max_perimeter
 from sprint3.final_efficient_quicksort import main, quicksort
 from sprint3.final_search_in_broken_list import search_in_shifted
-from sprint3.g_wardrobe import count_colors
+from sprint3.g_wardrobe import counting_sort
 from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
 from sprint3.j_bubble import run_bubble_sort
@@ -40,16 +40,15 @@ def test_a():
         assert len(brackets) == len(set(brackets))
 
 
-def test_b():
-    assert ' '.join(phone_combinations('23')) == 'ad ae af bd be bf cd ce cf'
-    assert (
-        ' '.join(phone_combinations('92'))
-        == 'wa wb wc xa xb xc ya yb yc za zb zc'
-    )
+@pytest.mark.parametrize('func', (phone_combinations, phone_combinations_rec))
+def test_b(func):
+    assert ' '.join(func('23')) == 'ad ae af bd be bf cd ce cf'
+    assert ' '.join(func('92')) == 'wa wb wc xa xb xc ya yb yc za zb zc'
 
 
 def test_c():
     assert is_subsequence('abc', 'ahbgdcu')
+    assert not is_subsequence('abcp', 'ahpc')
     assert is_subsequence('abc', 'xxxxxaxxxxbxxxxcxxx')
     assert not is_subsequence('abc', 'aaaabbb')
     assert not is_subsequence('abcd', 'abcp')
@@ -61,9 +60,17 @@ def test_d():
     assert count_happy([1, 1, 1, 5, 7], [1, 1, 2, 3, 3, 3, 6]) == 4
 
 
-def test_e():
-    assert count_houses([999, 999, 999], 300) == 0
-    assert count_houses([350, 999, 200], 1000) == 2
+@pytest.mark.parametrize('func', (count_houses, count_houses_acc))
+@pytest.mark.parametrize(
+    'houses, budget, expected',
+    (
+        ([999, 999, 999], 300, 0),
+        ([350, 999, 200], 1000, 2),
+        ([350, 999, 200], 2000, 3),
+    ),
+)
+def test_e(func, houses, budget, expected):
+    assert func(houses, budget) == expected
 
 
 def test_f():
@@ -72,12 +79,36 @@ def test_f():
 
 
 def test_g():
-    assert list(count_colors([0, 2, 1, 2, 0, 0, 1])) == [0, 0, 0, 1, 1, 2, 2]
+    assert list(counting_sort([0, 2, 1, 2, 0, 0, 1])) == [0, 0, 0, 1, 1, 2, 2]
 
 
-def test_h():
-    assert largest_number(['15', '56', '2']) == '56215'
-    assert largest_number(['1', '783', '2']) == '78321'
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        (
+            ['15', '56', '2'],
+            '56215',
+        ),
+        (
+            ['1', '783', '2'],
+            '78321',
+        ),
+        (
+            ['2', '4', '5', '2', '10'],
+            '542210',
+        ),
+        (
+            ['9', '10', '1', '1', '1', '6'],
+            '9611110',
+        ),
+        (
+            ['8', '89', '87'],
+            '89887',
+        ),
+    ),
+)
+def test_h(test_input, expected):
+    assert largest_number(test_input) == expected
 
 
 def test_i():
@@ -139,28 +170,45 @@ def test_k():
 
 
 @pytest.mark.parametrize(
-    'function', (bisect, left_binary_search_mod, left_binary_search_mod2)
+    'func', (bisect, left_binary_search_mod, left_binary_search_mod2)
 )
-def test_l(function):
-    assert function([], 1) == -1
-    assert function([0], 1) == -1
-    assert function([1], 1) == 1
-    assert function([1, 2, 4, 4, 6, 8], 3) == 3
-    assert function([1, 2, 4, 4, 6, 8], 6) == 5
-    assert function([0, 1, 1, 1], 1) == 2
-    assert function([0, 1, 2, 2, 2, 3, 4], 2) == 3
-    assert function([0, 1, 2], 3) == -1
+@pytest.mark.parametrize('a, k, expected', (
+    ([], 1, -1),
+    ([0], 1, -1),
+    ([1], 1, 1),
+    ([1, 2, 4, 4, 6, 8], 3, 3),
+    ([1, 2, 4, 4, 6, 8], 6, 5),
+    ([0, 1, 1, 1], 1, 2),
+    ([0, 1, 2, 2, 2, 3, 4], 2, 3),
+    ([0, 1, 2], 3, -1),
+))
+def test_l(func, a, k, expected):
+    assert func(a, k) == expected
 
 
-def test_n():
-    assert list(union([[7, 8], [7, 8], [2, 3], [6, 10]])) == [
-        [2, 3],
-        [6, 10],
-    ]
-    assert list(union([[7, 8], [6, 7], [1, 3], [1, 4], [2, 5]])) == [
-        [1, 5],
-        [6, 8],
-    ]
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        (
+            [[7, 8], [7, 8], [2, 3], [6, 10]],
+            [[2, 3], [6, 10]],
+        ),
+        (
+            [[2, 3], [5, 6], [3, 4], [3, 4]],
+            [[2, 4], [5, 6]],
+        ),
+        (
+            [[1, 3], [3, 5], [4, 6], [5, 6], [2, 4], [7, 10]],
+            [[1, 6], [7, 10]],
+        ),
+        (
+            [[7, 8], [6, 7], [1, 3], [1, 4], [2, 5]],
+            [[1, 5], [6, 8]],
+        ),
+    ),
+)
+def test_n(test_input, expected):
+    assert list(union(test_input)) == expected
 
 
 def test_final_search_in_broken_list():

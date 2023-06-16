@@ -1,3 +1,4 @@
+from itertools import accumulate
 from typing import List
 
 
@@ -10,6 +11,11 @@ def count_houses(houses: List[int], budget: int) -> int:
             break
         count += 1
     return count
+
+
+def count_houses_acc(houses: List[int], budget: int) -> int:
+    sums = accumulate(sorted(houses))
+    return next((i for i, acc in enumerate(sums) if acc > budget), len(houses))
 
 
 if __name__ == '__main__':
