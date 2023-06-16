@@ -11,7 +11,7 @@ from sprint3.d_cookies import count_happy
 from sprint3.e_houses import count_houses, count_houses_acc
 from sprint3.f_triangle import max_perimeter
 from sprint3.final_efficient_quicksort import main, quicksort
-from sprint3.final_search_in_broken_list import search_in_shifted
+from sprint3.final_broken_search import broken_search
 from sprint3.g_wardrobe import counting_sort
 from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
@@ -212,15 +212,17 @@ def test_n(test_input, expected):
 
 
 def test_final_search_in_broken_list():
-    assert search_in_shifted([19, 21, 100, 101, 1, 4, 5, 7, 12], 5) == 6
-    assert search_in_shifted([], 1) == -1
-    assert search_in_shifted([0], 1) == -1
-    assert search_in_shifted([1], 1) == 0
+    assert broken_search([19, 21, 100, 101, 1, 4, 5, 7, 12], 5) == 6
+    assert broken_search([5, 1], 1) == 1
+    assert broken_search([], 1) == -1
+    assert broken_search([0], 1) == -1
+    assert broken_search([1], 1) == 0
+
     n = 10
     lists = [list(islice(cycle(range(1, 1 + n)), i, i + n)) for i in range(n)]
     for a in lists:
         for i, value in enumerate(a):
-            assert search_in_shifted(a, value) == i
+            assert broken_search(a, value) == i
 
 
 @pytest.mark.parametrize(
@@ -269,6 +271,23 @@ def test_quicksort_random():
                 'alla',
                 'gosha',
                 'rita',
+            ],
+        ),
+        (
+            [
+                '5',
+                'alla 0 0',
+                'gena 0 0',
+                'gosha 0 0',
+                'rita 0 0',
+                'timofey 0 0',
+            ],
+            [
+                'alla',
+                'gena',
+                'gosha',
+                'rita',
+                'timofey',
             ],
         ),
     ),

@@ -1,3 +1,5 @@
+"""ID посылки: 88265139."""
+
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -9,8 +11,8 @@ class Participant:
     penalty: int
 
     @classmethod
-    def from_text(cls, s: str):
-        name, tasks, penalty = s.split()
+    def from_text(cls, text: str):
+        name, tasks, penalty = text.split()
         return cls(name=name, tasks=int(tasks), penalty=int(penalty))
 
     def __lt__(self, other: 'Participant'):
@@ -44,14 +46,14 @@ def quicksort(a: List, start: int = 0, end: Optional[int] = None) -> None:
         end = len(a) - 1
     if start >= end:
         return
-    parts_border = partition(a, start, end)
-    quicksort(a, start, parts_border)
-    quicksort(a, parts_border + 1, end)
+    border = partition(a, start, end)
+    quicksort(a, start, border)
+    quicksort(a, border + 1, end)
 
 
 def main():
-    n = int(input())
-    participants = [Participant.from_text(input()) for _ in range(n)]
+    count = int(input())
+    participants = [Participant.from_text(input()) for _ in range(count)]
     quicksort(participants)
     print(*participants, sep='\n')
 
