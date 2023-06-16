@@ -22,6 +22,7 @@ from sprint3.l_two_bicycles import (
     left_binary_search_mod,
     left_binary_search_mod2,
 )
+from sprint3.m_golden_mean import median_two
 from sprint3.n_flowerbeds import union
 
 
@@ -172,18 +173,45 @@ def test_k():
 @pytest.mark.parametrize(
     'func', (bisect, left_binary_search_mod, left_binary_search_mod2)
 )
-@pytest.mark.parametrize('a, k, expected', (
-    ([], 1, -1),
-    ([0], 1, -1),
-    ([1], 1, 1),
-    ([1, 2, 4, 4, 6, 8], 3, 3),
-    ([1, 2, 4, 4, 6, 8], 6, 5),
-    ([0, 1, 1, 1], 1, 2),
-    ([0, 1, 2, 2, 2, 3, 4], 2, 3),
-    ([0, 1, 2], 3, -1),
-))
+@pytest.mark.parametrize(
+    'a, k, expected',
+    (
+        ([], 1, -1),
+        ([0], 1, -1),
+        ([1], 1, 1),
+        ([1, 2, 4, 4, 6, 8], 3, 3),
+        ([1, 2, 4, 4, 6, 8], 6, 5),
+        ([0, 1, 1, 1], 1, 2),
+        ([0, 1, 2, 2, 2, 3, 4], 2, 3),
+        ([0, 1, 2], 3, -1),
+    ),
+)
 def test_l(func, a, k, expected):
     assert func(a, k) == expected
+
+
+@pytest.mark.parametrize(
+    'a, b, expected',
+    (
+        ([1, 3], [2], 2),
+        ([1, 3], [2, 2, 2, 2, 2], 2),
+        ([1, 2], [3], 2),
+        ([2], [2, 2], 2),
+        ([2], [2], 2),
+        ([1, 2], [3, 4], 2.5),
+        ([1, 4], [2, 3], 2.5),
+        ([1, 3, 5], [2, 4], 3),
+        ([1, 2, 3, 4, 5, 6], [10], 4),
+        ([1, 2, 3, 4, 5, 10], [6], 4),
+        ([1, 1, 2, 5, 6, 7], [3, 4, 4, 5, 9, 9, 9, 10, 11, 12], 5.5),
+        ([1, 1, 2, 5, 6, 7], [3, 4, 4, 5, 9, 9, 9, 10, 11, 12], 5.5),
+        ([1, 1], [3, 3], 2),
+    ),
+)
+def test_m(a, b, expected):
+    result = median_two(a, b)
+    assert result == expected
+    assert type(result) is type(expected)
 
 
 @pytest.mark.parametrize(
