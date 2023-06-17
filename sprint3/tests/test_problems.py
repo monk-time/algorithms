@@ -24,6 +24,7 @@ from sprint3.l_two_bicycles import (
 )
 from sprint3.m_golden_mean import median_two
 from sprint3.n_flowerbeds import union
+from sprint3.o_index_difference import min_diff_by_index
 
 
 def test_a():
@@ -237,6 +238,20 @@ def test_m(a, b, expected):
 )
 def test_n(test_input, expected):
     assert list(union(test_input)) == expected
+
+
+@pytest.mark.parametrize(
+    'nums, index, expected',
+    (
+        ([2, 3, 4], 2, 1),
+        ([1, 3, 1], 1, 0),
+        ([1, 3, 5], 3, 4),
+        ([7, 2, 7, 3], 4, 4),
+        ([9, 1, 10, 3, 4, 6, 2, 7], 6, 2),
+    ),
+)
+def test_o(nums, index, expected):
+    assert min_diff_by_index(nums, index) == expected
 
 
 def test_final_search_in_broken_list():
