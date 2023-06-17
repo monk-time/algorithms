@@ -23,11 +23,21 @@ def test_b():
     assert b_crash_me.polynomial_hash(s1) == b_crash_me.polynomial_hash(s2)
 
 
-def test_window_hashes():
-    a, m, s, size = 1000, 1000009, 'abcdefgh', 3
-    hashes = c_prefix_hashes.window_hashes(a, m, s, size)
-    for i, h in enumerate(hashes):
-        assert h == polynomial_hash(a, m, s[i : i + size])
+def test_prefix_hashes():
+    a, m, s = 1000, 1000009, 'abcdefgh'
+    prefixes = c_prefix_hashes.prefix_hashes(a, m, s)
+    for i, h in enumerate(prefixes):
+        assert h == polynomial_hash(a, m, s[: i + 1])
+
+
+def test_substring_hash():
+    a, m, s = 1000, 1000009, 'abcdefgh'
+    prefixes = c_prefix_hashes.prefix_hashes(a, m, s)
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            test_value = c_prefix_hashes.substring_hash(a, m, prefixes, i, j)
+            expected = polynomial_hash(a, m, s[i : j + 1])
+            assert test_value == expected
 
 
 @pytest.mark.parametrize(
