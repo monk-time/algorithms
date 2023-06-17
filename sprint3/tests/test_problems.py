@@ -10,8 +10,8 @@ from sprint3.c_subsequence import is_subsequence
 from sprint3.d_cookies import count_happy
 from sprint3.e_houses import count_houses, count_houses_acc
 from sprint3.f_triangle import max_perimeter
-from sprint3.final_efficient_quicksort import main, quicksort
 from sprint3.final_broken_search import broken_search
+from sprint3.final_efficient_quicksort import main, quicksort
 from sprint3.g_wardrobe import counting_sort
 from sprint3.h_large_number import largest_number
 from sprint3.i_conference_fans import top_k_schools
@@ -25,6 +25,7 @@ from sprint3.l_two_bicycles import (
 from sprint3.m_golden_mean import median_two
 from sprint3.n_flowerbeds import union
 from sprint3.o_index_difference import min_diff_by_index
+from sprint3.p_partial_sort import count_max_blocks
 
 
 def test_a():
@@ -252,6 +253,18 @@ def test_n(test_input, expected):
 )
 def test_o(nums, index, expected):
     assert min_diff_by_index(nums, index) == expected
+
+
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        ([0, 1, 3, 2], 3),
+        ([3, 6, 7, 4, 1, 5, 0, 2], 1),
+        ([1, 0, 2, 3, 4], 4),
+    ),
+)
+def test_p(test_input, expected):
+    assert count_max_blocks(test_input) == expected
 
 
 def test_final_search_in_broken_list():
