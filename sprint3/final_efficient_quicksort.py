@@ -1,4 +1,4 @@
-"""ID посылки: 88265139."""
+"""ID посылки: 88287103."""
 
 from dataclasses import dataclass
 from typing import List, Optional

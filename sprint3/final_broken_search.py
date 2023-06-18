@@ -1,4 +1,4 @@
-"""ID посылки: 88264568."""
+"""ID посылки: 88287031."""
 
 from typing import List
 
@@ -15,12 +15,12 @@ def broken_search(nums: List[int], target: int) -> int:
     to make the choice.
     On the diagram of arrangements below the shift is marked as |:
 
-    a--t--|-----m-----------   m <= a <= t   (choose left half)
-    a-----|--t--m-----------   t <= m <= a   (choose left half)
-    a-----|-----m--t--------   m <= t <= a   (choose right half)
     a--------t--m-----|-----   a <= t <= m   (choose left half)
     a-----------m--t--|-----   a <= m <= t   (choose right half)
     a-----------m-----|--t--   t <= a <= m   (choose right half)
+    a--t--|-----m-----------   m <= a <= t   (choose left half)
+    a-----|--t--m-----------   t <= m <= a   (choose left half)
+    a-----|-----m--t--------   m <= t <= a   (choose right half)
     """
     left, right = 0, len(nums)
     while left < right:
@@ -41,5 +41,5 @@ def broken_search(nums: List[int], target: int) -> int:
 if __name__ == '__main__':
     _ = int(input())
     target = int(input())
-    nums = list(map(int, input().split()))
+    nums = [int(s) for s in input().split()]
     print(broken_search(nums, target))
