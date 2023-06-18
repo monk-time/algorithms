@@ -1,3 +1,6 @@
+from itertools import starmap, pairwise
+from operator import sub
+
 DAY = 24 * 60
 
 
@@ -8,10 +11,8 @@ def to_minutes(time: str) -> int:
 
 def min_gap(arrivals: list[str]) -> int:
     minutes = sorted(map(to_minutes, arrivals))
-    min_gap = min(minutes[i + 1] - minutes[i] for i in range(len(minutes) - 1))
-    if len(minutes) >= 2:
-        min_gap = min(min_gap, DAY - minutes[-1] + minutes[0])
-    return min_gap
+    minutes.append(DAY + minutes[0])
+    return min(starmap(sub, pairwise(reversed(minutes))))
 
 
 if __name__ == '__main__':
