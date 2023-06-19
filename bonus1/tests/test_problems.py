@@ -9,7 +9,7 @@ from bonus1.e_substrings import max_substring_with_no_repeatitions
 from bonus1.f_anagram_grouping import anagram_groups
 from bonus1.g_competition import longest_balanced
 from bonus1.h_weird_comparison import weird_compare
-from bonus1.j_sum_of_four import find_sum_groups, find_sum_groups_slow
+from bonus1.j_sum_of_four import find_sum_groups
 
 
 @pytest.mark.parametrize(
@@ -185,7 +185,6 @@ def test_h(s, t, expected):
     assert weird_compare(s, t) == expected
 
 
-@pytest.mark.parametrize('func', (find_sum_groups, find_sum_groups_slow))
 @pytest.mark.parametrize(
     'nums, target, expected',
     (
@@ -244,7 +243,15 @@ def test_h(s, t, expected):
                 (-635277717, -585701463, -201952280, 500234731),
             ],
         ),
+        (
+            [1, 1, 1, 2, 2, 2, 10, 20, 30, 40],
+            53,
+            [
+                (1, 2, 10, 40),
+                (1, 2, 20, 30),
+            ],
+        ),
     ),
 )
-def test_j(func, nums, target, expected):
-    assert func(nums, target) == expected
+def test_j(nums, target, expected):
+    assert find_sum_groups(nums, target) == expected
