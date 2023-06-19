@@ -1,21 +1,14 @@
 def break_palindrome(s: str) -> str:
     if len(s) <= 1:
         return ''
-    s2 = []
-    has_changed = False
+    chars = list(s)
     for i, char in enumerate(s):
-        if (
-            not has_changed
-            and char != 'a'
-            and not (len(s) % 2 != 0 and i == len(s) // 2)
-        ):
-            s2.append('a')
-            has_changed = True
-        else:
-            s2.append(char)
-    if not has_changed:
-        s2[-1] = 'b'
-    return ''.join(s2)
+        if char != 'a' and (len(s) % 2 == 0 or i != len(s) // 2):
+            chars[i] = 'a'
+            break
+    else:  # no break
+        chars[-1] = 'b'
+    return ''.join(chars)
 
 
 if __name__ == '__main__':
