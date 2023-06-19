@@ -1,10 +1,10 @@
 import pytest
 
-from extra.a_steps import steps
-from extra.b_canonical_path import get_canonical_path
-from extra.c_buy_sell import find_max_difference
-from extra.d_time_difference import min_gap
-from extra.e_break_palindrome import break_palindrome, break_palindrome_func
+from shbr1.a_steps import steps
+from shbr1.b_canonical_path import get_canonical_path
+from shbr1.c_buy_sell import find_max_difference
+from shbr1.d_time_difference import min_gap
+from shbr1.e_break_palindrome import break_palindrome, break_palindrome_func
 
 
 @pytest.mark.parametrize(
