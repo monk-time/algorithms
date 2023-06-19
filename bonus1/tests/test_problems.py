@@ -10,6 +10,7 @@ from bonus1.f_anagram_grouping import anagram_groups
 from bonus1.g_competition import longest_balanced
 from bonus1.h_weird_comparison import weird_compare
 from bonus1.j_sum_of_four import find_sum_groups
+from bonus1.k_nearest_stop import subway_with_most_stops
 
 
 @pytest.mark.parametrize(
@@ -255,3 +256,14 @@ def test_h(s, t, expected):
 )
 def test_j(nums, target, expected):
     assert find_sum_groups(nums, target) == expected
+
+
+@pytest.mark.parametrize(
+    'subways, stops, expected',
+    (
+        ([[-1, 0], [1, 0], [2, 5]], [[10, 0], [20, 0], [22, 5]], 3),
+        ([[-1, 0], [1, 0], [0, 5]], [[10, 0], [20, 0], [20, 5]], 2),
+    ),
+)
+def test_k(subways, stops, expected):
+    assert subway_with_most_stops(subways, stops) == expected
