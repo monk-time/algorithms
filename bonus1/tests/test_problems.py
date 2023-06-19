@@ -9,6 +9,7 @@ from bonus1.e_substrings import max_substring_with_no_repeatitions
 from bonus1.f_anagram_grouping import anagram_groups
 from bonus1.g_competition import longest_balanced
 from bonus1.h_weird_comparison import weird_compare
+from bonus1.j_sum_of_four import find_sum_groups, find_sum_groups_slow
 
 
 @pytest.mark.parametrize(
@@ -182,3 +183,68 @@ def test_g(test_input, expected):
 )
 def test_h(s, t, expected):
     assert weird_compare(s, t) == expected
+
+
+@pytest.mark.parametrize('func', (find_sum_groups, find_sum_groups_slow))
+@pytest.mark.parametrize(
+    'nums, target, expected',
+    (
+        (
+            [2, 3, 2, 4, 1, 10, 3, 0],
+            10,
+            [
+                (0, 3, 3, 4),
+                (1, 2, 3, 4),
+                (2, 2, 3, 3),
+            ],
+        ),
+        (
+            [1, 0, -1, 0, 2, -2],
+            0,
+            [
+                (-2, -1, 1, 2),
+                (-2, 0, 0, 2),
+                (-1, 0, 0, 1),
+            ],
+        ),
+        (
+            [1, 1, 1, 1, 1],
+            4,
+            [
+                (1, 1, 1, 1),
+            ],
+        ),
+        (
+            [
+                875179293,
+                -635277717,
+                -806161990,
+                -683047340,
+                -764850536,
+                -201952280,
+                4851510,
+                -263638039,
+                500234731,
+                551296021,
+                -111930528,
+                39938747,
+                -746984919,
+                83074719,
+                745702422,
+                -313837990,
+                -730402707,
+                -585701463,
+                -240894220,
+                -302622779,
+            ],
+            -922696729,
+            [
+                (-764850536, -730402707, -302622779, 875179293),
+                (-746984919, -263638039, 4851510, 83074719),
+                (-635277717, -585701463, -201952280, 500234731),
+            ],
+        ),
+    ),
+)
+def test_j(func, nums, target, expected):
+    assert func(nums, target) == expected
