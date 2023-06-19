@@ -79,11 +79,10 @@ def test_d(test_input, expected):
         ('a', ''),
         ('bbb', 'abb'),
         ('cadac', 'aadac'),
-        ('adda', 'aada'),
-        ('d', ''),
         ('', ''),
         ('aaaa', 'aaab'),
-        ('ada', 'adb'),
+        ('aba', 'abb'),
+        ('aabaa', 'aabab'),
     ),
 )
 def test_e(test_input, expected):

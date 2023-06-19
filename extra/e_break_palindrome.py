@@ -5,8 +5,8 @@ def break_palindrome(s: str) -> str:
     has_changed = False
     for i, char in enumerate(s):
         if (
-            char != 'a'
-            and not has_changed
+            not has_changed
+            and char != 'a'
             and not (len(s) % 2 != 0 and i == len(s) // 2)
         ):
             s2.append('a')

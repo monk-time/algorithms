@@ -8,6 +8,7 @@ from bonus1.d_workshops import unique
 from bonus1.e_substrings import max_substring_with_no_repeatitions
 from bonus1.f_anagram_grouping import anagram_groups
 from bonus1.g_competition import longest_balanced
+from bonus1.h_weird_comparison import weird_compare
 
 
 @pytest.mark.parametrize(
@@ -164,3 +165,20 @@ def test_f(test_input, expected):
 )
 def test_g(test_input, expected):
     assert longest_balanced(test_input.split()) == expected
+
+
+@pytest.mark.parametrize(
+    's, t, expected',
+    (
+        ('mxyskaoghi', 'qodfrgmslc', True),
+        ('agg', 'xdd', True),
+        ('agg', 'xda', False),
+        ('abacaba', 'xhxixhx', True),
+        ('abc', 'aaa', False),
+        ('agg', 'pap', False),
+        ('aabba', 'ccddc', True),
+        ('aabba', 'ccddd', False),
+    ),
+)
+def test_h(s, t, expected):
+    assert weird_compare(s, t) == expected
