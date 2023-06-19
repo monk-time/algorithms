@@ -4,7 +4,7 @@ from extra.a_steps import steps
 from extra.b_canonical_path import get_canonical_path
 from extra.c_buy_sell import find_max_difference
 from extra.d_time_difference import min_gap
-from extra.e_break_palindrome import break_palindrome
+from extra.e_break_palindrome import break_palindrome, break_palindrome_func
 
 
 @pytest.mark.parametrize(
@@ -72,6 +72,7 @@ def test_d(test_input, expected):
     assert min_gap(test_input) == expected
 
 
+@pytest.mark.parametrize('func', (break_palindrome, break_palindrome_func))
 @pytest.mark.parametrize(
     'test_input, expected',
     (
@@ -83,7 +84,8 @@ def test_d(test_input, expected):
         ('aaaa', 'aaab'),
         ('aba', 'abb'),
         ('aabaa', 'aabab'),
+        ('bbbabbb', 'abbabbb'),
     ),
 )
-def test_e(test_input, expected):
-    assert break_palindrome(test_input) == expected
+def test_e(func, test_input, expected):
+    assert func(test_input) == expected
