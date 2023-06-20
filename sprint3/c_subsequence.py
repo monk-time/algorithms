@@ -1,7 +1,7 @@
 def is_subsequence(a: str, b: str):
     i = 0
-    for j in range(len(b)):
-        if a[i] == b[j]:
+    for ch in b:
+        if a[i] == ch:
             i += 1
             if i == len(a):
                 return True
