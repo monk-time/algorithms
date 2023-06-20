@@ -1,9 +1,4 @@
-from functools import reduce
 from typing import List
-
-
-def polynomial_hash(a: int, m: int, s: str) -> int:
-    return reduce(lambda acc, ch: (acc * a + ord(ch)) % m, s, 0)
 
 
 def prefix_hashes(a: int, m: int, s: str) -> List[int]:

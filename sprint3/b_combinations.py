@@ -19,12 +19,22 @@ def phone_combinations(buttons: str):
         yield ''.join(comb)
 
 
-def phone_combinations_rec(buttons: str, acc: str = ''):
-    if len(acc) == len(buttons):
-        yield acc
+def phone_combinations_rec(buttons: str, prefix: str = ''):
+    if len(prefix) == len(buttons):
+        yield prefix
         return
-    for letter in LETTERS[buttons[len(acc)]]:
-        yield from phone_combinations_rec(buttons, acc + letter)
+    for letter in LETTERS[buttons[len(prefix)]]:
+        yield from phone_combinations_rec(buttons, prefix + letter)
+
+
+def phone_combinations_rec_simple(buttons: str, prefix: str = ''):
+    if len(prefix) == len(buttons):
+        print(prefix)
+    else:
+        letters = LETTERS[buttons[len(prefix)]]
+        phone_combinations_rec_simple(buttons, prefix + letters[0])
+        phone_combinations_rec_simple(buttons, prefix + letters[1])
+        phone_combinations_rec_simple(buttons, prefix + letters[2])
 
 
 if __name__ == '__main__':

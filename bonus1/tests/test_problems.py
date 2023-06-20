@@ -9,8 +9,10 @@ from bonus1.e_substrings import max_substring_with_no_repeatitions
 from bonus1.f_anagram_grouping import anagram_groups
 from bonus1.g_competition import longest_balanced
 from bonus1.h_weird_comparison import weird_compare
+from bonus1.i_common_subarray import longest_common_subarray_len
 from bonus1.j_sum_of_four import find_sum_groups
 from bonus1.k_nearest_stop import subway_with_most_stops
+from bonus1.l_mnogogosha import substrings_k_times
 
 
 @pytest.mark.parametrize(
@@ -187,6 +189,17 @@ def test_h(s, t, expected):
 
 
 @pytest.mark.parametrize(
+    'a, b, expected',
+    (
+        ([1, 2, 3, 2, 1], [3, 2, 1, 5, 6], 3),
+        ([1, 2, 3, 4, 5], [4, 5, 9], 2),
+    ),
+)
+def test_i(a, b, expected):
+    assert longest_common_subarray_len(a, b) == expected
+
+
+@pytest.mark.parametrize(
     'nums, target, expected',
     (
         (
@@ -267,3 +280,14 @@ def test_j(nums, target, expected):
 )
 def test_k(subways, stops, expected):
     assert subway_with_most_stops(subways, stops) == expected
+
+
+@pytest.mark.parametrize(
+    's, n, k, expected',
+    (
+        ('gggggooooogggggoooooogggggssshaa', 10, 2, [0, 5]),
+        ('allallallallalla', 3, 4, [0, 1, 2]),
+    ),
+)
+def test_l(s, n, k, expected):
+    assert substrings_k_times(s, n, k) == expected
