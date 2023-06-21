@@ -103,7 +103,7 @@ def test_h():
     ),
 )
 def test_i(test_input, expected):
-    assert i_different_search_trees.count_search_trees(test_input) == expected
+    assert i_different_search_trees.count_distinct(test_input) == expected
 
 
 def test_j():
@@ -112,7 +112,7 @@ def test_j():
     node3 = j_add_node.Node(None, node2, 7)
     new_head = j_add_node.insert(node3, 6)
     assert new_head is node3
-    assert new_head.left.value == 6
+    assert new_head.left.value == 6  # type: ignore
 
 
 def test_k(capsys):
@@ -124,7 +124,7 @@ def test_k(capsys):
     node6 = k_show_range.Node(node5, None, 10)
     node7 = k_show_range.Node(node2, node6, 5)
     k_show_range.print_range(node7, 2, 8)
-    assert capsys.readouterr().out.strip().split('\n') == '2 5 8 8'
+    assert capsys.readouterr().out.strip().split('\n') == ['2', '5', '8', '8']
 
 
 def test_l():
