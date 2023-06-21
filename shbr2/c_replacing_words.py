@@ -1,8 +1,28 @@
-from typing import List
+from collections import defaultdict
+from functools import reduce
+from typing import Iterable
+
+LEAF = object()
 
 
-def replace_words(words: List[str], replacements: List[str]) -> List[str]:
-    return words
+def replace_words(words: list[str], prefixes: list[str]) -> Iterable[str]:
+    make_tree = lambda: defaultdict(make_tree)
+    prefix_tree = make_tree()
+    for prefix in prefixes:
+        leaf = reduce(lambda tree, ch: tree[ch], prefix, prefix_tree)
+        leaf[LEAF] = prefix  # type: ignore
+    for word in words:
+        subtree = prefix_tree
+        for char in word:
+            if char not in subtree:
+                yield word
+                break
+            subtree = subtree[char]
+            if LEAF in subtree:
+                yield subtree[LEAF]
+                break
+        else:  # no break
+            yield word
 
 
 if __name__ == '__main__':

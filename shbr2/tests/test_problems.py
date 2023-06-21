@@ -46,7 +46,7 @@ def test_b(test_input, expected):
     ),
 )
 def test_c(replacements, words, expected):
-    assert replace_words(words, replacements) == expected
+    assert list(replace_words(words, replacements)) == expected
 
 
 @pytest.mark.parametrize(
@@ -66,6 +66,10 @@ def test_d(test_input, expected):
     (
         ([1, 2, 3, 4, 5], 3),
         ([1, 1, 2, 3, 5, 5, 2, 2, 1, 5], 4),
+        ([1, 3, 5], 2),
+        ([1], 0),
+        ([1, 2], 0),
+        ([1, 1, 1], 0),
     ),
 )
 def test_e(test_input, expected):
