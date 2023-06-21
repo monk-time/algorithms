@@ -23,7 +23,7 @@ def subway_with_most_stops(subways: Coords, stops: Coords) -> int:
     for index, subway in enumerate(subways):
         seg_x, seg_y = get_segment(subway)
         count = 0
-        # Check 25 segments in 50x50 area around the subway segment
+        # Check 81 segments in 50x50 area around the subway segment
         for dx, dy in product(range(-4, 5), repeat=2):
             segment = (seg_x + dx, seg_y + dy)
             if segment not in stops_by_segment:
