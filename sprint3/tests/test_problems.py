@@ -19,8 +19,8 @@ from sprint3.j_bubble import run_bubble_sort
 from sprint3.k_merge_sort import merge, merge_sort
 from sprint3.l_two_bicycles import (
     bisect,
-    left_binary_search_mod,
-    left_binary_search_mod2,
+    left_binary_search,
+    left_binary_search_rec,
 )
 from sprint3.m_golden_mean import median_two
 from sprint3.n_flowerbeds import union
@@ -173,7 +173,7 @@ def test_k():
 
 
 @pytest.mark.parametrize(
-    'func', (bisect, left_binary_search_mod, left_binary_search_mod2)
+    'func', (bisect, left_binary_search, left_binary_search_rec)
 )
 @pytest.mark.parametrize(
     'a, k, expected',

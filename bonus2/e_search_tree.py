@@ -22,6 +22,19 @@ def traverse(root: Optional[Node]):
     yield from traverse(root.right)
 
 
+def traverse_iter(root: Optional[Node]):
+    """Traverse all nodes in a tree in-order (without recursion)."""
+    stack, node = [], root
+    while stack or node:
+        if node:
+            stack.append(node)
+            node = node.left
+        else:
+            node = stack.pop()
+            yield node
+            node = node.right
+
+
 def solution(root: Node) -> bool:
     """Check if a tree is a search tree."""
     nodes = traverse(root)

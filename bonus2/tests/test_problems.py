@@ -145,5 +145,19 @@ def test_n():
     node5 = n_tree_partition.Node(node3, node4, 10, 3)
     node6 = n_tree_partition.Node(node2, node5, 5, 6)
     left, right = n_tree_partition.split(node6, 4)
-    assert left.size == 4
-    assert right.size == 2
+    assert left and left.size == 4
+    assert right and right.size == 2
+
+    node10 = n_tree_partition.Node(value=10, left=None, right=None, size=1)
+    node9 = n_tree_partition.Node(value=7, left=None, right=None, size=1)
+    node8 = n_tree_partition.Node(value=8, left=node9, right=node10, size=3)
+    node7 = n_tree_partition.Node(value=5, left=None, right=None, size=1)
+    node6 = n_tree_partition.Node(value=4, left=None, right=node7, size=2)
+    node5 = n_tree_partition.Node(value=2, left=None, right=None, size=1)
+    node4 = n_tree_partition.Node(value=3, left=node5, right=node6, size=4)
+    node3 = n_tree_partition.Node(value=6, left=node4, right=node8, size=8)
+    node2 = n_tree_partition.Node(value=1, left=None, right=node3, size=9)
+    node1 = n_tree_partition.Node(value=9, left=node2, right=None, size=10)
+    left, right = n_tree_partition.split(node1, 7)
+    assert left and left.size == 7
+    assert right and right.size == 3
