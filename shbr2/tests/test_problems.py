@@ -24,6 +24,7 @@ def test_a(a, max_dist, expected):
     (
         ('R2G1R1B2G2', 1),
         ('R9G1B0', 0),
+        ('R0G0B0R0G0B0R0G0B0', 1),
     ),
 )
 def test_b(test_input, expected):
