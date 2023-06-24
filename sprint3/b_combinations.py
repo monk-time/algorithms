@@ -13,28 +13,16 @@ LETTERS = {
 }
 
 
-def phone_combinations(buttons: str):
-    pressed_buttons = (LETTERS[b] for b in buttons)
-    for comb in product(*pressed_buttons):
-        yield ''.join(comb)
+def phone_combinations(phone: str):
+    yield from map(''.join, product(*map(LETTERS.get, phone)))  # type: ignore
 
 
-def phone_combinations_rec(buttons: str, prefix: str = ''):
-    if len(prefix) == len(buttons):
+def phone_combinations_rec(phone: str, prefix: str = ''):
+    if len(prefix) == len(phone):
         yield prefix
         return
-    for letter in LETTERS[buttons[len(prefix)]]:
-        yield from phone_combinations_rec(buttons, prefix + letter)
-
-
-def phone_combinations_rec_simple(buttons: str, prefix: str = ''):
-    if len(prefix) == len(buttons):
-        print(prefix)
-    else:
-        letters = LETTERS[buttons[len(prefix)]]
-        phone_combinations_rec_simple(buttons, prefix + letters[0])
-        phone_combinations_rec_simple(buttons, prefix + letters[1])
-        phone_combinations_rec_simple(buttons, prefix + letters[2])
+    for letter in LETTERS[phone[len(prefix)]]:
+        yield from phone_combinations_rec(phone, prefix + letter)
 
 
 if __name__ == '__main__':
