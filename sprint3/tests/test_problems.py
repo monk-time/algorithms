@@ -267,13 +267,21 @@ def test_p(test_input, expected):
     assert count_max_blocks(test_input) == expected
 
 
-def test_final_search_in_broken_list():
-    assert broken_search([19, 21, 100, 101, 1, 4, 5, 7, 12], 5) == 6
-    assert broken_search([5, 1], 1) == 1
-    assert broken_search([], 1) == -1
-    assert broken_search([0], 1) == -1
-    assert broken_search([1], 1) == 0
+@pytest.mark.parametrize(
+    'test_input, target, expected',
+    (
+        ([19, 21, 100, 101, 1, 4, 5, 7, 12], 5, 6),
+        ([5, 1], 1, 1),
+        ([], 1, -1),
+        ([0], 1, -1),
+        ([1], 1, 0),
+    ),
+)
+def test_final_search_in_broken_list(test_input, target, expected):
+    assert broken_search(test_input, target) == expected
 
+
+def test_final_search_in_broken_list_random():
     n = 10
     lists = [list(islice(cycle(range(1, 1 + n)), i, i + n)) for i in range(n)]
     for a in lists:
