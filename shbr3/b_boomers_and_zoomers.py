@@ -27,11 +27,7 @@ def count_invitations_bruteforce(a: list[int]) -> int:
     return count
 
 
-if __name__ == '__main__':
-    # _ = input()
-    # ages = [int(s) for s in input().split()]
-    # print(count_invitations(ages))
-
+def test_bruteforce():
     import random
 
     while True:
@@ -40,3 +36,9 @@ if __name__ == '__main__':
         res_true = count_invitations_bruteforce(a)
         if res != res_true:
             print(f'{a=}, {res=}, {res_true=}')
+
+
+if __name__ == '__main__':
+    _ = input()
+    ages = [int(s) for s in input().split()]
+    print(count_invitations(ages))
