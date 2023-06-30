@@ -30,8 +30,7 @@ def count_max_lights(
         if left == right:
             break
         mid = ceil((left + right) / 2)
-        lights = make_x_same_lights(sorted_counts, lights_len, mid)
-        if lights:
+        if make_x_same_lights(sorted_counts, lights_len, mid):
             left = mid
         else:
             right = mid - 1

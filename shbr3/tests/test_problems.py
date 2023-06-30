@@ -4,7 +4,7 @@ import pytest
 from shbr3.a_count_positive import main
 from shbr3.b_boomers_and_zoomers import count_invitations
 from shbr3.c_festive_lights import count_max_lights, make_x_same_lights
-from shbr3.d_cows_in_stalls import max_min_distance
+from shbr3.d_cows_in_stalls import can_fit_at_x_distance, max_min_distance
 from shbr3.e_brewing_potions import max_sum_quality
 
 
@@ -76,8 +76,27 @@ def test_c(n, a, max_count, max_lights):
 
 
 @pytest.mark.parametrize(
+    'a, total_count, x, expected',
+    (
+        ([2, 5, 7, 11, 15, 20], 6, 2, True),
+        ([2, 5, 7, 11, 15, 20], 6, 3, False),
+        ([2, 5, 7, 11, 15, 20], 3, 9, True),
+        ([2, 5, 7, 11, 15, 20], 3, 10, False),
+    ),
+)
+def test_can_fit_at_x_distance(a, total_count, x, expected):
+    assert can_fit_at_x_distance(a, total_count, x) == expected
+
+
+@pytest.mark.parametrize(
     'a, k, expected',
-    (([2, 5, 7, 11, 15, 20], 3, 9),),
+    (
+        ([2, 5, 7, 11, 15, 20], 2, 9),
+        ([2, 5, 7, 11, 15, 20], 3, 9),
+        ([2, 5, 7, 11, 15, 20], 4, 5),
+        ([2, 5, 7, 11, 15, 20], 5, 4),
+        ([2, 5, 7, 11, 15, 20], 6, 2),
+    ),
 )
 def test_d(a, k, expected):
     assert max_min_distance(a, k) == expected
