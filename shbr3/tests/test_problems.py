@@ -3,7 +3,7 @@ import pytest
 
 from shbr3.a_count_positive import main
 from shbr3.b_boomers_and_zoomers import count_invitations
-from shbr3.c_festive_lights import count_max_lights
+from shbr3.c_festive_lights import count_max_lights, make_x_same_lights
 from shbr3.d_cows_in_stalls import max_min_distance
 from shbr3.e_brewing_potions import max_sum_quality
 
@@ -50,11 +50,25 @@ def test_b(test_input, expected):
 
 
 @pytest.mark.parametrize(
+    'sorted_counts, lights_len, x, expected',
+    (
+        ((50, 30, 10, 6, 2), 5, 2, (5,)),
+        ((50, 30, 10, 6, 2), 5, 10, (5,)),
+        ((50, 30, 10, 6, 2), 5, 12, (4, 1)),
+        ((50, 30, 10, 6, 2), 5, 15, (3, 2)),
+        ((50, 30, 10, 6, 2), 5, 16, None),
+    ),
+)
+def test_make_x_same_lights(sorted_counts, lights_len, x, expected):
+    assert make_x_same_lights(sorted_counts, lights_len, x) == expected
+
+
+@pytest.mark.parametrize(
     'n, a, max_count, max_lights',
     (
-        (3, [3, 3, 2, 1], 2, [1, 2, 3]),
-        (6, [15, 10, 8, 7, 6, 5, 1], 6, [2, 1, 1, 1, 1]),
-        (5, [50, 30, 10, 6, 2], 15, [3, 2]),
+        (3, (3, 3, 2, 1), 2, (1, 2, 3)),
+        (6, (15, 10, 8, 7, 6, 5, 1), 6, (1, 1, 2, 3, 4, 5)),
+        (5, (50, 30, 10, 6, 2), 15, (1, 1, 1, 2, 2)),
     ),
 )
 def test_c(n, a, max_count, max_lights):
