@@ -26,9 +26,8 @@ class Participant:
         return self.name
 
 
-def partition(a: List, start: int, end: int) -> int:
-    pivot = a[(start + end) // 2]
-    left, right = start, end
+def partition(a: List, left: int, right: int) -> int:
+    pivot = a[(left + right) // 2]
     while True:
         while a[left] < pivot:
             left += 1
@@ -41,14 +40,14 @@ def partition(a: List, start: int, end: int) -> int:
         right -= 1
 
 
-def quicksort(a: List, start: int = 0, end: Optional[int] = None) -> None:
-    if end is None:
-        end = len(a) - 1
-    if start >= end:
+def quicksort(a: List, left: int = 0, right: Optional[int] = None) -> None:
+    if right is None:
+        right = len(a) - 1
+    if left >= right:
         return
-    border = partition(a, start, end)
-    quicksort(a, start, border)
-    quicksort(a, border + 1, end)
+    border = partition(a, left, right)
+    quicksort(a, left, border)
+    quicksort(a, border + 1, right)
 
 
 def main():
