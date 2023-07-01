@@ -1,5 +1,5 @@
 from functools import reduce
-from random import choice
+from itertools import combinations_with_replacement
 from string import ascii_lowercase
 from typing import Tuple
 
@@ -12,13 +12,15 @@ def polynomial_hash(s: str) -> int:
 
 
 def find_collision() -> Tuple[str, str]:
-    strings = {}
+    strings, length = {}, 1
     while True:
-        s = ''.join(choice(ascii_lowercase) for _ in range(20))
-        hash_val = polynomial_hash(s)
-        if hash_val in strings and strings[hash_val] != s:
-            return s, strings[hash_val]
-        strings[hash_val] = s
+        combs = combinations_with_replacement(ascii_lowercase, length)
+        for s in map(''.join, combs):
+            hash_val = polynomial_hash(s)
+            if hash_val in strings:
+                return s, strings[hash_val]
+            strings[hash_val] = s
+        length += 1
 
 
 if __name__ == '__main__':
