@@ -1,11 +1,12 @@
 from io import StringIO
+from random import randint, seed
 import pytest
 
 from shbr3.a_count_positive import main
 from shbr3.b_boomers_and_zoomers import count_invitations
 from shbr3.c_festive_lights import count_max_lights, make_x_same_lights
 from shbr3.d_cows_in_stalls import can_fit_at_x_distance, max_min_distance
-from shbr3.e_brewing_potions import max_sum_quality
+from shbr3.e_brewing_potions import make_ge_counter, max_sum_quality
 
 
 @pytest.mark.parametrize(
@@ -100,6 +101,20 @@ def test_can_fit_at_x_distance(a, total_count, x, expected):
 )
 def test_d(a, k, expected):
     assert max_min_distance(a, k) == expected
+
+
+def test_make_ge_counter():
+    max_value = 10
+    seed(1)
+    for _ in range(100):
+        a_sorted_desc = sorted(
+            (randint(-max_value, max_value) for _ in range(10)), reverse=True
+        )
+        ge_counter = make_ge_counter(a_sorted_desc, max_value)
+        for value in range(-max_value, max_value + 1):
+            assert ge_counter[value] == sum(
+                1 for x in a_sorted_desc if x >= value
+            )
 
 
 @pytest.mark.parametrize(
