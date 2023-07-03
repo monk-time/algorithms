@@ -1,39 +1,48 @@
-MAX_VALUE = 10**6
+from itertools import accumulate
 
 
-def make_ge_counter(
-    a_sorted_desc: list[int], max_value: int = MAX_VALUE
-) -> dict[int, int]:
-    ge_counter = {}
-    index = len(a_sorted_desc) - 1
-    value = -max_value
-    while index >= 0:
-        while a_sorted_desc[index] >= value:
-            ge_counter[value] = index + 1
-            value += 1
-        index -= 1
-    while value <= max_value:
-        ge_counter[value] = 0
-        value += 1
-    return ge_counter
+MAX_QUALITY = 2 * 10**6
 
 
-def count_potions_ge_x(
-    a: list[int], ge_counter: dict[int, int], x: int
-) -> int:
-    return sum(ge_counter[max(x - value, x)] for value in a)
+def check(
+    min_quality: int, prefix_sums: list[int], quality: list[int], k: int
+) -> int | None:
+    count, total = 0, 0
+    for qual in quality:
+        if qual < min_quality:
+            break
+        count += 1
+        total += qual
+    j = 1
+    while j < len(quality) and quality[0] + quality[j] >= min_quality:
+        j += 1
+    for i in range(len(quality)):
+        if i + 1 >= j:
+            break
+        while j - 1 > i and quality[i] + quality[j - 1] < min_quality:
+            j -= 1
+        cur_count = j - i - 1
+        count += cur_count
+        total += prefix_sums[j - 1] - prefix_sums[i] + quality[i] * cur_count
+    if count >= k:
+        return total - (count - k) * min_quality
+    return None
 
 
-def max_sum_quality(a: list[int], k: int) -> int:
-    a_sorted_desc = sorted(a, reverse=True)
-    ge_counter = make_ge_counter(a_sorted_desc)
-    return 1
+def max_sum_quality(quality: list[int], k: int) -> int | None:
+    quality.sort(reverse=True)
+    prefix_sums = list(accumulate(quality))
+    left, right = -MAX_QUALITY, MAX_QUALITY
+    while left < right:
+        mid = (left + right + 1) // 2
+        if check(mid, prefix_sums, quality, k) is None:
+            right = mid - 1
+        else:
+            left = mid
+    return check(left, prefix_sums, quality, k)
 
 
 if __name__ == '__main__':
-    a = [8, 8, 8, 5, 3, 0, 0, -1, -5, -5]
-    print(make_ge_counter(a))
-
-#     n, k = [int(s) for s in input().split()]
-#     a = [int(s) for s in input().split()]
-#     print(max_sum_quality(a, k))
+    n, k = [int(s) for s in input().split()]
+    quality = [int(s) for s in input().split()]
+    print(max_sum_quality(quality, k))
