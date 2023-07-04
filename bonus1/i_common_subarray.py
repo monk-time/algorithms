@@ -3,7 +3,7 @@ from typing import List
 
 def has_common_subarray_of_len(a: List[int], b: List[int], n: int) -> bool:
     m1, m2 = 10**9 + 7, 10**9 + 9
-    q1, q2 = 31, 29
+    q1, q2 = 257, 263
     q1_big, q2_big = pow(q1, n - 1, m1), pow(q2, n - 1, m2)
 
     hashes_a_dict = {}
@@ -36,16 +36,14 @@ def longest_common_subarray_len(a: List[int], b: List[int]) -> int:
     if len(a) > len(b):
         a, b = b, a
 
-    max_len = 0
-    left, right = 1, len(a)
-    while left <= right:
-        mid = (left + right) // 2
+    left, right = 0, len(a)
+    while left < right:
+        mid = (left + right + 1) // 2
         if has_common_subarray_of_len(a, b, mid):
-            max_len = mid
-            left = mid + 1
+            left = mid
         else:
             right = mid - 1
-    return max_len
+    return left
 
 
 if __name__ == '__main__':
