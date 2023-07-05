@@ -1,32 +1,40 @@
-from typing import List
+from collections import defaultdict
+from functools import reduce
+from typing import List, DefaultDict
+
+
+m, q = 10**9 + 7, 257
+
+
+def prefix_hash(a: List[int], n: int) -> int:
+    return reduce(lambda acc, i: (acc * q + a[i] + 1) % m, range(n), 0)
+
+
+def is_not_collision(
+    a: List[int], b: List[int], n: int, a_indices: List[int], b_index: int
+) -> bool:
+    return any(
+        all(a[a_index + i] == b[b_index + i] for i in range(n))
+        for a_index in a_indices
+    )
 
 
 def has_common_subarray_of_len(a: List[int], b: List[int], n: int) -> bool:
-    m1, m2 = 10**9 + 7, 10**9 + 9
-    q1, q2 = 257, 263
-    q1_big, q2_big = pow(q1, n - 1, m1), pow(q2, n - 1, m2)
+    q_big = pow(q, n - 1, m)
 
-    hashes_a_dict = {}
-    h1, h2 = 0, 0
-    for i in range(n):
-        h1 = (h1 * q1 + a[i] + 1) % m1
-        h2 = (h2 * q2 + a[i] + 1) % m2
-    hashes_a_dict[(h1, h2)] = 0
+    a_hashes: DefaultDict[int, list[int]] = defaultdict(list)
+    h = prefix_hash(a, n)
+    a_hashes[h].append(0)
     for i in range(1, len(a) - n + 1):
-        h1 = ((h1 - (a[i - 1] + 1) * q1_big) * q1 + a[i + n - 1] + 1) % m1
-        h2 = ((h2 - (a[i - 1] + 1) * q2_big) * q2 + a[i + n - 1] + 1) % m2
-        hashes_a_dict[(h1, h2)] = i
+        h = ((h - (a[i - 1] + 1) * q_big) * q + a[i + n - 1] + 1) % m
+        a_hashes[h].append(i)
 
-    h1, h2 = 0, 0
-    for i in range(n):
-        h1 = (h1 * q1 + b[i] + 1) % m1
-        h2 = (h2 * q2 + b[i] + 1) % m2
-    if (h1, h2) in hashes_a_dict:
+    h = prefix_hash(b, n)
+    if h in a_hashes and is_not_collision(a, b, n, a_hashes[h], 0):
         return True
     for i in range(1, len(b) - n + 1):
-        h1 = ((h1 - (b[i - 1] + 1) * q1_big) * q1 + b[i + n - 1] + 1) % m1
-        h2 = ((h2 - (b[i - 1] + 1) * q2_big) * q2 + b[i + n - 1] + 1) % m2
-        if (h1, h2) in hashes_a_dict:
+        h = ((h - (b[i - 1] + 1) * q_big) * q + b[i + n - 1] + 1) % m
+        if h in a_hashes and is_not_collision(a, b, n, a_hashes[h], i):
             return True
 
     return False
