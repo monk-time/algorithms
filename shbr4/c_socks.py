@@ -2,18 +2,16 @@ MAX_VALUE = 10_000
 
 
 def thickness(socks: list[list[int]], points: list[int]) -> list[int]:
-    count_by_start = [0] * (MAX_VALUE + 1)
-    count_by_end = [0] * (MAX_VALUE + 1)
-    thicknesses = [0] * (MAX_VALUE + 1)
+    starts, ends, thicknesses = [[0] * MAX_VALUE for _ in range(3)]
     for start, end in socks:
-        count_by_start[start] += 1
-        count_by_end[end] += 1
+        starts[start - 1] += 1
+        ends[end - 1] += 1
     count = 0
-    for i in range(1, MAX_VALUE + 1):
-        count += count_by_start[i]
+    for i in range(MAX_VALUE):
+        count += starts[i]
         thicknesses[i] = count
-        count -= count_by_end[i]
-    return [thicknesses[i] for i in points]
+        count -= ends[i]
+    return [thicknesses[p - 1] for p in points]
 
 
 if __name__ == '__main__':
