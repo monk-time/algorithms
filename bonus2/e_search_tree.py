@@ -37,10 +37,22 @@ def traverse_iter(root: Optional[Node]):
 
 def solution(root: Node) -> bool:
     """Check if a tree is a search tree."""
-    nodes = traverse(root)
-    prev_value = next(nodes).value
-    for node in nodes:
-        if node.value <= prev_value:
-            return False
-        prev_value = node.value
-    return True
+    it, it2 = traverse(root), traverse(root)
+    next(it2, None)
+    return all(left.value < right.value for left, right in zip(it, it2))
+
+
+def solution2(root: Node) -> bool:
+    def rec(root: Node):
+        is_left_ok, left_min, left_max = (
+            rec(root.left) if root.left else (True, root.value, -float('inf'))
+        )
+        is_right_ok, right_min, right_max = (
+            rec(root.right) if root.right else (True, float('inf'), root.value)
+        )
+        is_root_ok = (
+            is_left_ok and is_right_ok and left_max < root.value < right_min
+        )
+        return is_root_ok, left_min, right_max
+
+    return rec(root)[0]
