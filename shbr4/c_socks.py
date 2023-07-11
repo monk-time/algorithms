@@ -1,17 +1,16 @@
+from itertools import accumulate
+from operator import add
+
 MAX_VALUE = 10_000
 
 
 def thickness(socks: list[list[int]], points: list[int]) -> list[int]:
-    starts, ends, thicknesses = [[0] * MAX_VALUE for _ in range(3)]
+    counter = [0] * (MAX_VALUE + 1)
     for start, end in socks:
-        starts[start - 1] += 1
-        ends[end - 1] += 1
-    count = 0
-    for i in range(MAX_VALUE):
-        count += starts[i]
-        thicknesses[i] = count
-        count -= ends[i]
-    return [thicknesses[p - 1] for p in points]
+        counter[start - 1] += 1
+        counter[end] -= 1
+    counter = list(accumulate(counter, add))
+    return [counter[p - 1] for p in points]
 
 
 if __name__ == '__main__':
