@@ -299,23 +299,35 @@ def test_j(commands, expected, capsys):
     assert capsys.readouterr().out.split() == expected
 
 
-def test_k():
-    assert fib(0) == 1
-    assert fib(1) == 1
-    assert fib(2) == 2
-    assert fib(3) == 3
-    assert fib(10) == 89
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        (0, 1),
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (10, 89),
+    ),
+)
+def test_k(test_input, expected):
+    assert fib(test_input) == expected
 
 
-def test_l():
-    assert fib_mod(0, 1) == 1
-    assert fib_mod(1, 1) == 1
-    assert fib_mod(2, 1) == 2
-    assert fib_mod(3, 1) == 3
-    assert fib_mod(10, 2) == 89
-    assert fib_mod(10, 4) == 89
-    assert fib_mod(100, 5) == 84101
-    assert fib_mod(10**6, 8) == 26937501
+@pytest.mark.parametrize(
+    'test_input, expected',
+    (
+        ((0, 1), 1),
+        ((1, 1), 1),
+        ((2, 1), 2),
+        ((3, 1), 3),
+        ((10, 2), 89),
+        ((10, 4), 89),
+        ((100, 5), 84101),
+        ((10**6, 8), 26937501),
+    ),
+)
+def test_l(test_input, expected):
+    assert fib_mod(*test_input) == expected
 
 
 @pytest.mark.parametrize(
