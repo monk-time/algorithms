@@ -6,13 +6,6 @@ class Node:
         self.value = value
         self.children = []
 
-    def __repr__(self):
-        if not self.children:
-            return str(self.value)
-        return (
-            f'{self.value} -> {" ".join(str(x.value) for x in self.children)}'
-        )
-
 
 Nodes = list[Node]
 
