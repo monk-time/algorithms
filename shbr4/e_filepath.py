@@ -19,9 +19,3 @@ if __name__ == '__main__':
     filename = input()
     filetree = [input() for _ in range(int(input()))]
     print(find_path(filetree, filename))
-
-
-def mormons(start, reach, target):
-    if start >= target:
-        return 0
-    return 1 + mormons(start * (reach + 1), reach, target)
