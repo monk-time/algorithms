@@ -7,14 +7,10 @@ def find_max_good_substring_length(s: str, min_count: int) -> int:
         counter = defaultdict(list)
         for i in range(left, right + 1):
             counter[s[i]].append(i)
-        split_points = sorted(
-            chain.from_iterable(
-                lst for lst in counter.values() if len(lst) < min_count
-            )
-        )
-        if not split_points:
+        bad_chars = (lst for lst in counter.values() if len(lst) < min_count)
+        split_points = [left - 1, *sorted(chain(*bad_chars)), right + 1]
+        if len(split_points) == 2:
             return right - left + 1
-        split_points = [left - 1, *split_points, right + 1]
         return max(rec(a + 1, b - 1) for a, b in pairwise(split_points))
 
     return rec(0, len(s) - 1)
