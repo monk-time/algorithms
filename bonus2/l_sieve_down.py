@@ -1,7 +1,4 @@
-from typing import List
-
-
-def sift_down(heap: List[int], index: int) -> int:
+def sift_down(heap: list[int], index: int) -> int:
     left = 2 * index
     right = left + 1
     if left >= len(heap):

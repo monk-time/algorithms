@@ -8,6 +8,6 @@ def min_minmax_diff(lengths: list[int], extra: int) -> int:
 
 
 if __name__ == '__main__':
-    count, extra = [int(s) for s in input().split()]
+    count, extra = (int(s) for s in input().split())
     lengths = [int(s) for s in input().split()]
     print(min_minmax_diff(lengths, extra))

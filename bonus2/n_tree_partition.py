@@ -1,4 +1,4 @@
-from typing import Optional, Tuple
+from typing import Optional
 
 
 class Node:
@@ -15,9 +15,7 @@ class Node:
         self.size = size
 
 
-def split(
-    root: Optional[Node], k: int
-) -> Tuple[Optional[Node], Optional[Node]]:
+def split(root: Node | None, k: int) -> tuple[Node | None, Node | None]:
     """Remove the smallest k nodes into a separate search tree."""
     if not root or k == 0:
         return None, root

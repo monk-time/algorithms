@@ -2,21 +2,21 @@ class DoubleConnectedNode:
     def __init__(
         self,
         value,
-        next: 'DoubleConnectedNode' = None,
-        prev: 'DoubleConnectedNode' = None,
+        next: 'DoubleConnectedNode | None' = None,  # noqa: A002
+        prev: 'DoubleConnectedNode | None' = None,
     ):
         self.value = value
         self.next = next
         self.prev = prev
 
 
-def print_linked_list(node: DoubleConnectedNode):
+def print_linked_list(node: DoubleConnectedNode | None):
     while node:
         print(node.value)
         node = node.next
 
 
-def reverse(node: DoubleConnectedNode):
+def reverse(node: DoubleConnectedNode | None):
     prev_node = node
     while node:
         node.prev, node.next = node.next, node.prev

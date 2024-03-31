@@ -1,7 +1,7 @@
-from functools import lru_cache
+from functools import cache
 
 
-@lru_cache(maxsize=None)
+@cache
 def count_distinct(n: int) -> int:
     """Count distinct search trees with n unique numbers."""
     if n == 0:

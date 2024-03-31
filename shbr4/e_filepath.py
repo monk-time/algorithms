@@ -9,7 +9,7 @@ def find_path(filetree: list[str], filename: str) -> str:
             for _ in range(prev_depth - depth):
                 stack.pop()
         if name == filename:
-            return (f'/{"/".join(stack)}/' if stack else '/') + filename
+            return (f'/{'/'.join(stack)}/' if stack else '/') + filename
         prev_depth = depth
         prev_name = name
     return ''

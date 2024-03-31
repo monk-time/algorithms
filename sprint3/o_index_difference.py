@@ -1,8 +1,7 @@
 from bisect import bisect
-from typing import List
 
 
-def count_pairs(a: List[int], max_diff: int) -> int:
+def count_pairs(a: list[int], max_diff: int) -> int:
     """Count pairs with absolute difference less than or equal to max_diff.
 
     For every element count the number of such pairs in a[i:].
@@ -14,7 +13,7 @@ def count_pairs(a: List[int], max_diff: int) -> int:
     return sum(bisect(a, n + max_diff) - (i + 1) for i, n in enumerate(a))
 
 
-def min_diff_by_index(a: List[int], index: int):
+def min_diff_by_index(a: list[int], index: int):
     a = sorted(a)
     min_diff = min(a[i + 1] - a[i] for i in range(len(a) - 1))
     max_diff = a[-1] - a[0]

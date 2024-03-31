@@ -17,7 +17,7 @@ def make_x_same_lights(
 
 
 def count_max_lights(
-    counts: tuple[int], lights_len: int
+    counts: tuple[int, ...], lights_len: int
 ) -> tuple[int, tuple[int, ...]]:
     enumerated_counts = sorted(
         zip(counts, range(len(counts))),
@@ -47,7 +47,7 @@ def count_max_lights(
 
 
 if __name__ == '__main__':
-    n, k = [int(s) for s in input().split()]
+    n, k = (int(s) for s in input().split())
     a = tuple(int(input()) for _ in range(k))
     max_count, max_lights = count_max_lights(a, n)
     print(max_count)

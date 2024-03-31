@@ -1,5 +1,5 @@
 def twosum(a, k):
-    for i in range(0, len(a)):
+    for i in range(len(a)):
         for j in range(i + 1, len(a)):
             if a[i] + a[j] == k:
                 return a[i], a[j]

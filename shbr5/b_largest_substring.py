@@ -17,6 +17,6 @@ def find_max_good_substring_length(s: str, min_count: int) -> int:
 
 
 if __name__ == '__main__':
-    n, min_count = [int(s) for s in input().split()]
+    n, min_count = (int(s) for s in input().split())
     s = input()
     print(find_max_good_substring_length(s, min_count))

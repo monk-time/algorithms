@@ -3,7 +3,7 @@ def factorization(n: int):
         yield 1
         return
     factor = 2
-    while factor ** 2 <= n:
+    while factor**2 <= n:
         if n % factor == 0:
             yield factor
             n //= factor

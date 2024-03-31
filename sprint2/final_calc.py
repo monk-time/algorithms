@@ -1,8 +1,6 @@
 """ID посылки: 87911546."""
 
-
 import operator
-
 
 OPERATIONS = {
     '+': operator.add,

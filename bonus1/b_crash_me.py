@@ -1,7 +1,6 @@
 from functools import reduce
 from itertools import combinations_with_replacement
 from string import ascii_lowercase
-from typing import Tuple
 
 a = 1_000
 m = 123_987_123
@@ -11,7 +10,7 @@ def polynomial_hash(s: str) -> int:
     return reduce(lambda acc, ch: (acc * a + ord(ch)) % m, s, 0)
 
 
-def find_collision() -> Tuple[str, str]:
+def find_collision() -> tuple[str, str]:
     strings, length = {}, 1
     while True:
         combs = combinations_with_replacement(ascii_lowercase, length)

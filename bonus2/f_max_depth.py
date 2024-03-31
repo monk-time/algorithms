@@ -13,7 +13,7 @@ class Node:
         self.right = right
 
 
-def solution(root: Optional[Node]) -> int:
+def solution(root: Node | None) -> int:
     """Find max depth of a tree."""
     if not root:
         return 0

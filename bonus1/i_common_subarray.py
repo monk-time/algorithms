@@ -1,17 +1,15 @@
 from collections import defaultdict
 from functools import reduce
-from typing import List, DefaultDict
-
 
 m, q = 10**9 + 7, 257
 
 
-def prefix_hash(a: List[int], n: int) -> int:
+def prefix_hash(a: list[int], n: int) -> int:
     return reduce(lambda acc, i: (acc * q + a[i] + 1) % m, range(n), 0)
 
 
 def is_not_collision(
-    a: List[int], b: List[int], n: int, a_indices: List[int], b_index: int
+    a: list[int], b: list[int], n: int, a_indices: list[int], b_index: int
 ) -> bool:
     return any(
         all(a[a_index + i] == b[b_index + i] for i in range(n))
@@ -19,10 +17,10 @@ def is_not_collision(
     )
 
 
-def has_common_subarray_of_len(a: List[int], b: List[int], n: int) -> bool:
+def has_common_subarray_of_len(a: list[int], b: list[int], n: int) -> bool:
     q_big = pow(q, n - 1, m)
 
-    a_hashes: DefaultDict[int, list[int]] = defaultdict(list)
+    a_hashes: defaultdict[int, list[int]] = defaultdict(list)
     h = prefix_hash(a, n)
     a_hashes[h].append(0)
     for i in range(1, len(a) - n + 1):
@@ -40,7 +38,7 @@ def has_common_subarray_of_len(a: List[int], b: List[int], n: int) -> bool:
     return False
 
 
-def longest_common_subarray_len(a: List[int], b: List[int]) -> int:
+def longest_common_subarray_len(a: list[int], b: list[int]) -> int:
     if len(a) > len(b):
         a, b = b, a
 

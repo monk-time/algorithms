@@ -10,7 +10,7 @@ def gen_binary(n, prefix, space=''):
 
 def gen_brackets(n: int, left: int = 0, right: int = 0, s: str = '', space=''):
     if left == right == n:
-        print(f"{space}└───print: {s}")
+        print(f'{space}└───print: {s}')
     if left < n:
         div = '├' if right < left else '└'
         print(f"{space}{div}───gen_brackets({n}, {left + 1}, {right}, '{s}(')")

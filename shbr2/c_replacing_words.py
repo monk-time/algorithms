@@ -1,6 +1,6 @@
 from collections import defaultdict
+from collections.abc import Iterable
 from functools import reduce
-from typing import Iterable
 
 LEAF = object()
 

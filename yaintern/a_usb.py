@@ -11,7 +11,7 @@ def min_price(
 
 
 if __name__ == '__main__':
-    port_count, gadget_count, price_c2, price_c5 = [
+    port_count, gadget_count, price_c2, price_c5 = (
         int(input()) for _ in range(4)
-    ]
+    )
     print(min_price(port_count, gadget_count, price_c2, price_c5))

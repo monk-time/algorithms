@@ -10,7 +10,7 @@ def get_canonical_path(s: str) -> str:
     for part in s.split('/'):
         if part == '..' and parts:
             parts.pop()
-        elif part not in ('', '.', '..'):
+        elif part not in {'', '.', '..'}:
             parts.append(part)
     return '/' + '/'.join(parts)
 

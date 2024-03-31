@@ -1,7 +1,4 @@
-from typing import List
-
-
-def run_bubble_sort(a: List[int]) -> None:
+def run_bubble_sort(a: list[int]) -> None:
     is_sorted_at_start = True
     is_sorted = False
     while not is_sorted:

@@ -1,10 +1,7 @@
-from typing import List
-
-
-def max_perimeter(lens: List[int]) -> int:
+def max_perimeter(lens: list[int]) -> int | None:
     lens.sort(reverse=True)
     for i in range(len(lens) - 2):
-        c, b, a = lens[i:i + 3]
+        c, b, a = lens[i : i + 3]
         if c < a + b:
             return a + b + c
     return None

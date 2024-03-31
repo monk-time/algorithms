@@ -16,8 +16,7 @@ def make_tree(parent_values: list[int]) -> list[Node]:
         visited.add(parent)
         node = Node(i + 1, parent)
         nodes.append(node)
-    leaves = [node for node in nodes if node not in visited]
-    return leaves
+    return [node for node in nodes if node not in visited]
 
 
 def max_depth(leaves: list[Node]) -> int:

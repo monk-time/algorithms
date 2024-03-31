@@ -1,6 +1,4 @@
-from typing import List
-
-ListForm = List[int]
+ListForm = list[int]
 
 
 def parse(s: str) -> ListForm:

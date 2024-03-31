@@ -13,7 +13,7 @@ class Node:
         self.right = right
 
 
-def solution(root1: Optional[Node], root2: Optional[Node]) -> bool:
+def solution(root1: Node | None, root2: Node | None) -> bool:
     """Check if two trees are identical."""
     return not any((root1, root2)) or (
         (root1 is not None and root2 is not None)

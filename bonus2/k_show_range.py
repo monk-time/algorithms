@@ -13,7 +13,7 @@ class Node:
         self.value = value
 
 
-def print_range(node: Optional[Node], left, right):
+def print_range(node: Node | None, left, right):
     """Print all nodes in a search tree that are in a given range."""
     if not node:
         return

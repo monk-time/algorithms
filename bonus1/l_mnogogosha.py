@@ -1,6 +1,3 @@
-from typing import List
-
-
 def polynomial_hash(s: str, q: int, m: int) -> int:
     hash_ = 0
     for ch in s:
@@ -9,7 +6,7 @@ def polynomial_hash(s: str, q: int, m: int) -> int:
     return hash_
 
 
-def substrings_k_times(s: str, n: int, k: int) -> List[int]:
+def substrings_k_times(s: str, n: int, k: int) -> list[int]:
     # One hash gives too many collisions. Let's use two hashes!
     m_1, m_2 = 10**9 + 7, 10**9 + 9
     q_1, q_2 = 31, 29

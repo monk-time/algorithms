@@ -1,8 +1,5 @@
-from typing import List
-
-
-def unique(a: List) -> List:
-    return list({key: None for key in a}.keys())
+def unique(a: list) -> list:
+    return list(dict.fromkeys(a).keys())
 
 
 if __name__ == '__main__':

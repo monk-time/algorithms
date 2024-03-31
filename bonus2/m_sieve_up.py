@@ -1,7 +1,4 @@
-from typing import List
-
-
-def sift_up(heap: List[int], index: int) -> int:
+def sift_up(heap: list[int], index: int) -> int:
     if index == 1:
         return index
 

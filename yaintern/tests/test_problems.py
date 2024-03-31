@@ -1,3 +1,5 @@
+from itertools import starmap
+
 import pytest
 
 from yaintern.a_usb import min_price
@@ -70,7 +72,7 @@ def test_c(test_input, expected):
     ),
 )
 def test_d(digs, sidewalk_count, laying_count, expected):
-    digs = [Dig(*dig) for dig in digs]
+    digs = list(starmap(Dig, digs))
     assert min_sadness(digs, sidewalk_count, laying_count) == expected
 
 

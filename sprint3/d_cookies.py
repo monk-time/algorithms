@@ -1,7 +1,4 @@
-from typing import List
-
-
-def count_happy(greed: List[int], cookies: List[int]):
+def count_happy(greed: list[int], cookies: list[int]):
     greed.sort()
     cookies.sort()
     i = 0

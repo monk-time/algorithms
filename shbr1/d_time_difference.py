@@ -1,4 +1,4 @@
-from itertools import starmap, pairwise
+from itertools import pairwise, starmap
 from operator import sub
 
 DAY = 24 * 60

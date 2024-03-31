@@ -17,7 +17,7 @@ def solution(root: Node) -> int:
     """Find a sum of the max path in a tree."""
     max_path = [root.value]
 
-    def get_max_from_node(node: Optional[Node]):
+    def get_max_from_node(node: Node | None):
         if node is None:
             return 0
 

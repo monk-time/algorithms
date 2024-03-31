@@ -12,18 +12,20 @@ class DequeEmptyError(Exception):
 class Deque:
     def __init__(self, max_size: int):
         self._max_size = max_size
-        self._deque = [None] * max_size
+        self._deque: list[int | None] = [None] * max_size
         self._first = 1
         self._last = 0
         self._size = 0
 
     def _check_full(self):
         if self._size == self._max_size:
-            raise DequeFullError('Max deque size reached')
+            msg = 'Max deque size reached'
+            raise DequeFullError(msg)
 
     def _check_empty(self):
         if self._size == 0:
-            raise DequeEmptyError('Deque is empty')
+            msg = 'Deque is empty'
+            raise DequeEmptyError(msg)
 
     def push_front(self, value: int):
         self._check_full()
@@ -42,14 +44,14 @@ class Deque:
         value = self._deque[self._first]
         self._first = (self._first + 1) % self._max_size
         self._size -= 1
-        return value  # noqa
+        return value
 
     def pop_back(self):
         self._check_empty()
         value = self._deque[self._last]
         self._last = (self._last - 1) % self._max_size
         self._size -= 1
-        return value  # noqa
+        return value
 
 
 def main():

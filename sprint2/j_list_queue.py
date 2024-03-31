@@ -18,7 +18,7 @@ class ListQueueDeque:
 
 
 class Node:
-    def __init__(self, value, next_item: 'Node' = None):
+    def __init__(self, value, next_item: 'Node | None' = None):
         self.value = value
         self.next_item = next_item
 
@@ -45,7 +45,7 @@ class ListQueue:
         value = self.first.value
         self.first = self.first.next_item
         self.queue_size -= 1
-        return value  # noqa
+        return value
 
     def size(self):
         return self.queue_size

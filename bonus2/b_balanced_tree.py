@@ -14,7 +14,7 @@ class Node:
 
 
 def solution(root: Node) -> bool:
-    def balanced_depth(root: Optional[Node]):
+    def balanced_depth(root: Node | None):
         """Return binary tree depth if it's balanced, -1 otherwise."""
         if not root:
             return 0

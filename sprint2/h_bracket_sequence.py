@@ -7,7 +7,7 @@ def is_correct_bracket_seq(s: str) -> bool:
         if not unclosed_brackets:
             return False
         last_open = unclosed_brackets.pop()
-        if not (last_open, ch) in (('[', ']'), ('(', ')'), ('{', '}')):
+        if (last_open, ch) not in {('[', ']'), ('(', ')'), ('{', '}')}:
             return False
     return not unclosed_brackets
 

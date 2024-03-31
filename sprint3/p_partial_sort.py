@@ -1,7 +1,4 @@
-from typing import List
-
-
-def count_max_blocks(a: List[int]) -> int:
+def count_max_blocks(a: list[int]) -> int:
     blocks = []
     for n in a:
         cur_min, cur_max = n, n

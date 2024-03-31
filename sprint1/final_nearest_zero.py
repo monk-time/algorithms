@@ -1,10 +1,9 @@
 """ID посылки: 87592079."""
 
 from math import inf
-from typing import List
 
 
-def nearest_zeroes(numbers: List[int]) -> List[int]:
+def nearest_zeroes(numbers: list[int]) -> list[int]:
     distances = []
     last_zero = -1
     for i, value in enumerate(numbers):

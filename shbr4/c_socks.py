@@ -14,7 +14,7 @@ def thickness(socks: list[list[int]], points: list[int]) -> list[int]:
 
 
 if __name__ == '__main__':
-    max_value, sock_count, point_count = [int(s) for s in input().split()]
+    max_value, sock_count, point_count = (int(s) for s in input().split())
     socks = [[int(s) for s in input().split()] for _ in range(sock_count)]
     points = [int(input()) for _ in range(point_count)]
     print(*thickness(socks, points), sep='\n')

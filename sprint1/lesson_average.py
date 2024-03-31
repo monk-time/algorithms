@@ -7,7 +7,7 @@ def moving_average(a, k):
     return result
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     n = int(input())
     a = list(map(int, input().split()))
     k = int(input())

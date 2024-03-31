@@ -30,6 +30,6 @@ def min_sadness(
 
 
 if __name__ == '__main__':
-    sidewalk_count, dig_count, laying_count = [int(s) for s in input().split()]
+    sidewalk_count, dig_count, laying_count = (int(s) for s in input().split())
     digs = [Dig(*map(int, input().split())) for _ in range(dig_count)]
     print(min_sadness(digs, sidewalk_count, laying_count))

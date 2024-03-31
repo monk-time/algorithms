@@ -1,7 +1,4 @@
-from typing import List
-
-
-def merge_sort(a: List[int], left: int, right: int) -> None:
+def merge_sort(a: list[int], left: int, right: int) -> None:
     if right - left <= 1:
         return
 
@@ -11,7 +8,7 @@ def merge_sort(a: List[int], left: int, right: int) -> None:
     a[left:right] = merge(a, left, mid, right)
 
 
-def merge(a: List[int], left: int, mid: int, right: int) -> List[int]:
+def merge(a: list[int], left: int, mid: int, right: int) -> list[int]:
     result = []
     i, j = left, mid
     while i < mid or j < right:

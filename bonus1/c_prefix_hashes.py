@@ -1,7 +1,4 @@
-from typing import List
-
-
-def prefix_hashes(a: int, m: int, s: str) -> List[int]:
+def prefix_hashes(a: int, m: int, s: str) -> list[int]:
     # Can be even shorter with itertools.accumulate
     result, hash_ = [], 0
     for ch in s:
@@ -10,7 +7,7 @@ def prefix_hashes(a: int, m: int, s: str) -> List[int]:
     return result
 
 
-def substring_hash(a: int, m: int, prefixes: List[int], i: int, j: int) -> int:
+def substring_hash(a: int, m: int, prefixes: list[int], i: int, j: int) -> int:
     if not i:
         return prefixes[j]
     return (prefixes[j] - pow(a, j - i + 1, m) * prefixes[i - 1]) % m

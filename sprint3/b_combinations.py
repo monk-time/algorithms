@@ -1,6 +1,5 @@
 from itertools import product
 
-
 LETTERS = {
     '2': 'abc',
     '3': 'def',

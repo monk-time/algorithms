@@ -1,7 +1,4 @@
-from typing import List
-
-
-def calc_chaos(temps: List[int]) -> int:
+def calc_chaos(temps: list[int]) -> int:
     n = len(temps)
     return sum(
         (i == 0 or temps[i] > temps[i - 1])

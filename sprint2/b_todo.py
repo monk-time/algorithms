@@ -1,10 +1,10 @@
 class Node:
-    def __init__(self, value, next_item: 'Node' = None):
+    def __init__(self, value, next_item: 'Node | None' = None):
         self.value = value
         self.next_item = next_item
 
 
-def print_linked_list(node: Node):
+def print_linked_list(node: Node | None):
     while node:
         print(node.value)
         node = node.next_item

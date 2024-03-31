@@ -1,7 +1,7 @@
-from typing import Iterable, List
+from collections.abc import Iterable
 
 
-def union(segments: List[List[int]]) -> Iterable[List[int]]:
+def union(segments: list[list[int]]) -> Iterable[list[int]]:
     segments.sort()
     left = 0
     while left < len(segments):

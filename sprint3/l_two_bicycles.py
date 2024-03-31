@@ -1,8 +1,7 @@
 from bisect import bisect_left
-from typing import List
 
 
-def binary_search(a: List[int], k: int) -> int:
+def binary_search(a: list[int], k: int) -> int:
     left, right = 0, len(a)
     while left < right:
         mid = (left + right) // 2
@@ -18,7 +17,7 @@ def binary_search(a: List[int], k: int) -> int:
 DAY_OFFSET = 1
 
 
-def left_binary_search(a: List[int], k: int) -> int:
+def left_binary_search(a: list[int], k: int) -> int:
     left, right = 0, len(a) - 1
     while left < right:
         mid = (left + right) // 2
@@ -29,7 +28,7 @@ def left_binary_search(a: List[int], k: int) -> int:
     return left + DAY_OFFSET if a and a[left] >= k else -1
 
 
-def left_binary_search_rec(a: List[int], k: int) -> int:
+def left_binary_search_rec(a: list[int], k: int) -> int:
     def rec(left: int, right: int):
         if left > right:
             return -1
@@ -43,7 +42,7 @@ def left_binary_search_rec(a: List[int], k: int) -> int:
     return rec(0, len(a) - 1)
 
 
-def bisect(a: List[int], k: int) -> int:
+def bisect(a: list[int], k: int) -> int:
     pos = bisect_left(a, k)
     return pos + DAY_OFFSET if pos < len(a) else -1
 

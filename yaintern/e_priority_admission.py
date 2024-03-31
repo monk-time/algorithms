@@ -14,7 +14,7 @@ def enroll(program_spots: list[int], priorities: list[list[int]]) -> list[int]:
         for index, (rating, _, *programs) in enumerate(priorities)
     ]
     persons.sort(key=lambda person: person.rating)
-    program_spots = [0] + program_spots  # programs are counted from 1
+    program_spots = [0, *program_spots]  # programs are counted from 1
     admissions = [-1] * len(persons)
     for person in persons:
         for program in person.programs:
@@ -26,7 +26,7 @@ def enroll(program_spots: list[int], priorities: list[list[int]]) -> list[int]:
 
 
 if __name__ == '__main__':
-    person_count, program_count = [int(s) for s in input().split()]
+    person_count, program_count = (int(s) for s in input().split())
     program_spots = [int(s) for s in input().split()]
     priorities = [
         [int(s) for s in input().split()] for _ in range(person_count)

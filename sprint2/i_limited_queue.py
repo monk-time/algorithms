@@ -29,7 +29,7 @@ class MyQueueSizedDeque:
 class MyQueueSized:
     def __init__(self, max_size: int):
         self.max_size = max_size
-        self.queue = [None] * max_size
+        self.queue: list[int | None] = [None] * max_size
         self.index_first = self.index_last = 0
         self.queue_size = 0
 
@@ -47,7 +47,7 @@ class MyQueueSized:
         value = self.queue[self.index_first]
         self.index_first = (self.index_first + 1) % self.max_size
         self.queue_size -= 1
-        return value  # noqa
+        return value
 
     def peek(self):
         if not self.queue_size:

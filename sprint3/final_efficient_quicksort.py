@@ -1,7 +1,6 @@
 """ID посылки: 88287103."""
 
 from dataclasses import dataclass
-from typing import List, Optional
 
 
 @dataclass
@@ -17,7 +16,8 @@ class Participant:
 
     def __lt__(self, other: 'Participant'):
         if not isinstance(other, Participant):
-            raise TypeError('Участников можно сравнивать только друг с другом')
+            msg = 'Участников можно сравнивать только друг с другом'
+            raise TypeError(msg)
         self_key = (-self.tasks, self.penalty, self.name)
         other_key = (-other.tasks, other.penalty, other.name)
         return self_key < other_key
@@ -26,7 +26,7 @@ class Participant:
         return self.name
 
 
-def partition(a: List, left: int, right: int) -> int:
+def partition(a: list, left: int, right: int) -> int:
     pivot = a[(left + right) // 2]
     while True:
         while a[left] < pivot:
@@ -40,7 +40,7 @@ def partition(a: List, left: int, right: int) -> int:
         right -= 1
 
 
-def quicksort(a: List, left: int = 0, right: Optional[int] = None) -> None:
+def quicksort(a: list, left: int = 0, right: int | None = None) -> None:
     if right is None:
         right = len(a) - 1
     if left >= right:

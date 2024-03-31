@@ -1,0 +1,62 @@
+[tool.ruff]
+target-version = "py312"
+line-length = 79
+preview = true
+output-format = "concise" # preview mode switches this to full
+
+[tool.ruff.lint]
+select = [
+    "E4", "E7", "E9", "F", # defaults
+    "C90",   # mccabe
+    "I",     # isort
+    "N",     # pep8-naming
+    "D",     # pydocstyle
+    "UP",    # pyupgrade
+    "ASYNC", # flake8-async
+    "BLE",   # flake8-blind-except
+    "FBT",   # flake8-boolean-trap
+    "B0",    # flake8-bugbear (excluding opinionated warnings)
+    "A",     # flake8-builtins
+    "C4",    # flake8-comprehensions
+    "DTZ",   # flake8-datetimez
+    "EM",    # flake8-errmsg
+    "ICN",   # flake8-import-conventions
+    "PIE",   # flake8-pie
+    "PT",    # flake8-pytest-style
+    "RSE",   # flake8-raise
+    "RET",   # flake8-return
+    "SIM",   # flake8-simplify
+    "TID",   # flake8-tidy-imports
+    "ARG",   # flake8-unused-arguments
+    "PL",    # pylint
+    "PERF",  # perflint
+    "FURB",  # refurb
+    "LOG",   # flake8-logging
+    "RUF",   # ruff-specific rules
+]
+ignore = [
+    "E731",    # allow assigning lambda expressions
+    "D206",    # (from docs) conflicts with formatter
+    "D300",    # (from docs) conflicts with formatter
+    "D1",      # allow missing docstrings
+    "PLC0415", # allow imports outside top-level
+    "PLR2004", # allow magic values in comparisons
+]
+allowed-confusables = [
+    "а", "б", "в", "г", "е", "з", "и", "к", "м", "н", "о", "р", "с", "у", "ф", "х",
+    "А", "Б", "В", "Г", "Е", "З", "И", "К", "М", "Н", "О", "Р", "С", "У", "Ф", "Х",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["N802"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+parametrize-names-type = "csv"
+parametrize-values-type = "tuple"
+
+[tool.ruff.format]
+quote-style = "single"

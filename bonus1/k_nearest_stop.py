@@ -1,10 +1,8 @@
 from collections import Counter
 from itertools import product
-from typing import List, Tuple
 
-
-Coord = Tuple[int, int]
-Coords = List[Coord]
+Coord = tuple[int, int]
+Coords = list[Coord]
 
 
 def get_segment(c: Coord) -> Coord:
@@ -32,7 +30,7 @@ def subway_with_most_stops(subways: Coords, stops: Coords) -> int:
             if (
                 -2 <= dx <= 2
                 and -2 <= dy <= 2
-                and not ((dx == -2 or dx == 2) and (dy == -2 or dy == 2))
+                and not ((dx in {-2, 2}) and (dy in {-2, 2}))
             ):
                 count += sum(stops_by_segment[segment].values())
                 continue
@@ -52,7 +50,7 @@ def main():
     subways = [tuple(int(s) for s in input().split()) for _ in range(n)]
     m = int(input())
     stops = [tuple(int(s) for s in input().split()) for _ in range(m)]
-    print(subway_with_most_stops(subways, stops))
+    print(subway_with_most_stops(subways, stops))  # type: ignore
 
 
 def reverse_engineer_killer_sequence(subways: Coords, stops: Coords):

@@ -1,8 +1,8 @@
 from collections import Counter
-from typing import List
+from collections.abc import Iterable
 
 
-def counting_sort(a: List[int]) -> List[int]:
+def counting_sort(a: list[int]) -> Iterable[int]:
     for key, count in sorted(Counter(a).items()):
         for _ in range(count):
             yield key

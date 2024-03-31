@@ -1,8 +1,7 @@
 from collections import Counter
-from typing import List
 
 
-def top_k_schools(schools: List[int], k: int) -> List[int]:
+def top_k_schools(schools: list[int], k: int) -> list[int]:
     counter = Counter(schools)
     by_freq_value = lambda t: (-t[1], t[0])
     top_schools = sorted(counter.items(), key=by_freq_value)

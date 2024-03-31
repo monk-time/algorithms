@@ -1,5 +1,5 @@
+from collections.abc import Iterable
 from itertools import accumulate
-from typing import Iterable
 
 
 def count_positive(a: list[int], queries: list[list[int]]) -> Iterable[int]:

@@ -16,7 +16,7 @@ class Node:
 def solution(root: Node) -> int:
     """Find sum of all path "numbers" in a tree."""
 
-    def traverse(node: Optional[Node], prefix: str = ''):
+    def traverse(node: Node | None, prefix: str = ''):
         if not node:
             return
         new_prefix = prefix + str(node.value)

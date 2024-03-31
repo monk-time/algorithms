@@ -1,9 +1,7 @@
 """ID посылки: 88287031."""
 
-from typing import List
 
-
-def broken_search(nums: List[int], target: int) -> int:
+def broken_search(nums: list[int], target: int) -> int:
     """Binary search for value in a shifted sorted list.
 
     In order to choose which half to move to we need to know

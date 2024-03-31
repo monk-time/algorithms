@@ -19,7 +19,5 @@ def solution(root: Node) -> int:
     while stack:
         node = stack.pop()
         max_value = max(node.value, max_value)
-        for child in (node.left, node.right):
-            if child:
-                stack.append(child)
+        stack.extend(filter(None, (node.left, node.right)))
     return max_value

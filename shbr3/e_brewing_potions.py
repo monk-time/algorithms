@@ -1,6 +1,5 @@
 from itertools import accumulate
 
-
 MAX_QUALITY = 2 * 10**6
 
 
@@ -43,6 +42,6 @@ def max_sum_quality(quality: list[int], k: int) -> int | None:
 
 
 if __name__ == '__main__':
-    n, k = [int(s) for s in input().split()]
+    n, k = (int(s) for s in input().split())
     quality = [int(s) for s in input().split()]
     print(max_sum_quality(quality, k))

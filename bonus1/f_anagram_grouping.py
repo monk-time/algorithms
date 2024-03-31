@@ -1,9 +1,8 @@
 from collections import Counter, defaultdict
-from typing import List
 
 
-def anagram_groups(words: List[str]) -> List[List[int]]:
-    groups = defaultdict(lambda: [])
+def anagram_groups(words: list[str]) -> list[list[int]]:
+    groups = defaultdict(list)
     for index, word in enumerate(words):
         key = frozenset(Counter(word).items())
         groups[key].append(index)

@@ -1,9 +1,7 @@
-from typing import List
-
-Matrix = List[List[int]]
+Matrix = list[list[int]]
 
 
-def neighbors(matrix: Matrix, row: int, col: int) -> List[int]:
+def neighbors(matrix: Matrix, row: int, col: int) -> list[int]:
     rows = len(matrix)
     cols = len(matrix[0])
     deltas = ((-1, 0), (1, 0), (0, -1), (0, 1))

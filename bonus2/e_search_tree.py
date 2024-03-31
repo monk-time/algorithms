@@ -13,7 +13,7 @@ class Node:
         self.right = right
 
 
-def traverse(root: Optional[Node]):
+def traverse(root: Node | None):
     """Traverse all nodes in a tree in-order."""
     if not root:
         return
@@ -22,7 +22,7 @@ def traverse(root: Optional[Node]):
     yield from traverse(root.right)
 
 
-def traverse_iter(root: Optional[Node]):
+def traverse_iter(root: Node | None):
     """Traverse all nodes in a tree in-order (without recursion)."""
     stack, node = [], root
     while stack or node:

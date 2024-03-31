@@ -1,6 +1,4 @@
-from typing import List
-
-Matrix = List[List[int]]
+Matrix = list[list[int]]
 
 
 def transpose(matrix: Matrix, rows: int, cols: int) -> Matrix:
