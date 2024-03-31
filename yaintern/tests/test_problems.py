@@ -22,8 +22,8 @@ def test_a(test_input, expected):
 @pytest.mark.parametrize(
     'test_input, expected',
     (
-        (((15, 19), 0), 4),
-        (((1, 11, 6, 41, 15, 13, 14), 2), 9),
+        (([15, 19], 0), 4),
+        (([1, 11, 6, 41, 15, 13, 14], 2), 9),
     ),
 )
 def test_b(test_input, expected):

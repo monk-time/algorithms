@@ -1,4 +1,5 @@
 from io import StringIO
+
 import pytest
 
 from shbr3.a_count_positive import main
@@ -91,7 +92,7 @@ def test_can_fit_at_x_distance(a, total_count, x, expected):
 @pytest.mark.parametrize(
     'a, k, expected',
     (
-        ([2, 5, 7, 11, 15, 20], 2, 9),
+        ([2, 5, 7, 11, 15, 20], 2, 18),
         ([2, 5, 7, 11, 15, 20], 3, 9),
         ([2, 5, 7, 11, 15, 20], 4, 5),
         ([2, 5, 7, 11, 15, 20], 5, 4),
