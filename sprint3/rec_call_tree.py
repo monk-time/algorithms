@@ -22,7 +22,5 @@ def gen_brackets(n: int, left: int = 0, right: int = 0, s: str = '', space=''):
 
 
 if __name__ == '__main__':
-    # print("gen_binary(3, '')")
-    # gen_binary(3, '')
     print("gen_brackets(3, '')")
     gen_brackets(3)

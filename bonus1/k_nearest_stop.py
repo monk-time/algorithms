@@ -79,14 +79,7 @@ def test_killer_sequence():
     stops = [(c1 + randint(-s, s), c2 + randint(-s, s)) for _ in range(m)]
 
     now = time()
-
     print(subway_with_most_stops(subways, stops))
-    # import cProfile
-
-    # with cProfile.Profile() as pr:
-    #     print(subway_with_most_stops(subways, stops))
-    # pr.print_stats()
-
     print(f'{time() - now:.3f} sec')
 
 

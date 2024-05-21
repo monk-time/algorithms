@@ -17,7 +17,6 @@ def longest_balanced(sequence: Sequence[str]) -> int:
             max_length = length
             max_index = index_by_balance[balance] + 1
 
-    # max_balanced_sequence = sequence[max_index:max_index + max_length]
     return max_length
 
 
