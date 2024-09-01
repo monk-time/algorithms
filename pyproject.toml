@@ -22,6 +22,8 @@ ignore = [
     "PLR2004", # magic-value-comparison      (demands too many constants)
     "TD003",   # missing-todo-link           (too cumbersome)
     "G004",    # logging-f-string            (pointless micro-optimization in most cases)
+    "DOC201",  # docstring-missing-returns   (excessive documentation)
+    "DOC402",  # docstring-missing-yields    (excessive documentation)
 ]
 allowed-confusables = [
     "а", "б", "в", "г", "е", "з", "и", "к", "м", "н", "о", "р", "с", "у", "ф", "х",
